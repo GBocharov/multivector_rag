@@ -91,7 +91,7 @@ file: UploadFile
 async def text_search(
 text: str = 'fun pic'
 ):
-    results = await pr.search_Texts(text)
+    results = await pr.search_Texts(query = text)
     if not results:
         return 'empty collection has been provided'
     print(results)

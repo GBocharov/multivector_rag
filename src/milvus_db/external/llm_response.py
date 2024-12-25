@@ -41,11 +41,11 @@ async def image_embeddings(image: Image, filename: str = 'image'):
 
 
 async def text_embeddings(text: str = 'test'):
-    url = "http://localhost:8001/llm_router/get_text_embeddings"
+    url = f"http://localhost:8001/llm_router/get_text_embeddings?text={text}"
     async with httpx.AsyncClient() as client:
         try:
-            data = {"text": text}
-            response = await client.post(url, data=data)
+            #data = {"text": text}
+            response = await client.post(url)
             response.raise_for_status()  # Проверка на успешный ответ
             return response
         except httpx.HTTPStatusError as e:

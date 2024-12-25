@@ -30,7 +30,7 @@ def data_to_images(file_path, batch_size : int = 10) -> List[PIL.Image.Image]:
 
 
 
-def scale_image(image: Image.Image, new_height: int = 524) -> Image.Image:
+def scale_image(image: Image.Image, new_height: int = 824) -> Image.Image:
     """
     Scale an image to a new height while maintaining the aspect ratio.
     """

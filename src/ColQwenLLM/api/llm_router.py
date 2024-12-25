@@ -40,7 +40,7 @@ async def image_embeddings(file: UploadFile):
     "/get_text_embeddings"
 )
 async def text_embeddings(text: str = 'test'):
-
+    print(f'text = {text}')
     res = get_text_embeddings([text])
 
     byte_data = pickle.dumps(res)

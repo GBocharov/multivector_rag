@@ -51,7 +51,7 @@ def image_query(image: Image, query: str = 'test'):
         }
     ]
 
-    image = scale_image(image)
+    image = scale_image(image, 624)
     text_prompt = processor_generation.apply_chat_template(conversation, add_generation_prompt=True)
     inputs_generation = processor_generation(
         text=[text_prompt],

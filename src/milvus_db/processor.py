@@ -23,7 +23,7 @@ def get_collection_info(collection_name:str):
         return 'no such collection'
     info = client.get_collection_stats(collection_name)
 
-    info = client.query(collection_name=collection_name, filter="doc_id like \"red%\"", output_fields=['vector', "doc_id"])
+    info = client.query(collection_name=collection_name, filter='doc_id in [1,5]', output_fields=['doc', "doc_id"])
 
 
     print(info)
@@ -72,15 +72,15 @@ async def search_Texts(query: str, collection_name:str = 'test'):
     retriever = collections[collection_name]
     results = []
 
+    print(f'query = {query}')
     response = await text_embeddings(query)
     query = pickle.loads(response.content)[0]
-
     result = retriever.search(query, topk=5)
     results.append(result)
-    import pprint as pp
-    print('------>')
-    pp.pprint(results)
-    pp.pprint(type(results))
+    # import pprint as pp
+    # print('------>')
+    # # pp.pprint(results)
+    # pp.pprint(type(results))
 
     return results
 

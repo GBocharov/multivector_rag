@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import RedirectResponse
 
 from src.ColQwenLLM.api.llm_router import llm_router
