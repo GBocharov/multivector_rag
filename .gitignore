@@ -1,0 +1,8 @@
+__pycache__/
+.idea/
+pages/
+image_data/
+*.db
+/*test*.py
+
+
