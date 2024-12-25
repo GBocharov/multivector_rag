@@ -1,18 +1,14 @@
 import os
-from typing import List
 
-import torch
-from PIL import Image
 from pymilvus import MilvusClient, DataType
 import numpy as np
 import concurrent.futures
 
-from document_utils.doc_parsers import scale_image
-from model.ColQwen2ForRAG import get_image_embeddings, get_text_embeddings
+from src.milvus_db.schema import data_schema
 
 client = MilvusClient(uri="./milvus.db")
 
-class MilvusColbertRetriever:
+class MilvusColbertCollection:
     def __init__(self, milvus_client, collection_name, dim=128):
         # Initialize the retriever with a Milvus client, collection name, and dimensionality of the vector embeddings.
         # If the collection exists, load it.
@@ -31,21 +27,8 @@ class MilvusColbertRetriever:
         # Drop the existing collection if it already exists and define the schema for the collection.
         if self.client.has_collection(collection_name=self.collection_name):
             self.client.drop_collection(collection_name=self.collection_name)
-
-        schema = self.client.create_schema(
-            auto_id=True,
-            enable_dynamic_fields=True,
-        )
-        schema.add_field(field_name="pk", datatype=DataType.INT64, is_primary=True)
-        schema.add_field(
-            field_name="vector", datatype=DataType.FLOAT_VECTOR, dim=self.dim
-        )
-        schema.add_field(field_name="seq_id", datatype=DataType.INT16)
-        schema.add_field(field_name="doc_id", datatype=DataType.INT64)
-        schema.add_field(field_name="doc", datatype=DataType.VARCHAR, max_length=65535)
-
         self.client.create_collection(
-            collection_name=self.collection_name, schema=schema
+            collection_name=self.collection_name, schema=data_schema
         )
 
     def create_index(self):
@@ -157,39 +140,7 @@ class MilvusColbertRetriever:
             ],
         )
 
+retriever = MilvusColbertCollection(collection_name="colpali", milvus_client=client)
 
 
-retriever = MilvusColbertRetriever(collection_name="colpali", milvus_client=client)
-retriever.create_collection()
-retriever.create_index()
 
-if __name__ == '__main__':
-    images = [scale_image(Image.open("../pages/" + name) )for name in os.listdir("../pages")]
-
-    paths =  [ name for name in os.listdir("../pages")]
-    embeddings = get_image_embeddings(images)
-
-
-    print(paths)
-    for i in range(len(images)):
-        data = {
-            "colbert_vecs": embeddings[i].float().numpy(),
-            "doc_id": i,
-            "filepath": paths[i],
-        }
-        retriever.insert(data)
-
-    q = [
-         'Задания по математике',
-         'отрицание в математике',
-         'мужик и бритва',
-
-         ]
-
-    q_e = get_text_embeddings(q)
-
-
-    for query in q_e:
-        query = query.float().numpy()
-        result = retriever.search(query, topk=3)
-        print(result)

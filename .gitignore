@@ -1,7 +1,7 @@
 __pycache__/
 .idea/
-pages/
-image_data/
+temp_data/pages/
+temp_data/image_data/
 *.db
 /*test*.py
 

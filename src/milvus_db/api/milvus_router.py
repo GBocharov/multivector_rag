@@ -1,14 +1,13 @@
 import io
-from typing import Callable, List, Tuple, Annotated
+from typing import List
 
-from PIL import Image
+import PIL.Image
 #from asyncpg import Connection
-from fastapi import APIRouter, Depends, HTTPException, Query, File, Response, UploadFile
-from pydantic import BaseModel, Field
+from fastapi import APIRouter, UploadFile
 from fastapi.responses import FileResponse
 
-import milvus_multi_vector_db.processor as pr
-from document_utils.save_to_dir import save_image_to_dir, save_pdf_to_dir_as_images
+import src.milvus_db.processor as pr
+from src.document_utils.save_to_dir import save_image_to_dir, save_pdf_to_dir_as_images
 
 milvus_router = APIRouter(
     prefix="/milvus_router",
@@ -53,17 +52,22 @@ collection_name:str = 'test'
     # fastapi.tiangolo.com/advanced/additional-responses/#additional-media-types-for-the-main-response
 )
 async def insert_image(
-file: UploadFile
+files: List[UploadFile]
 ):
-    upload_path = r'/image_data'
-    request_object_content = await file.read()
-    img = Image.open(io.BytesIO(request_object_content))
+    upload_path = r'/home/gleb/PycharmProjects/vllm_db_test/temp_data/image_data'
+    paths = []
+    images = []
+    for im in files:
+        request_object_content = await im.read()
+        img = PIL.Image.open(io.BytesIO(request_object_content))
 
-    path = save_image_to_dir(img, upload_path, file.filename)
+        path = save_image_to_dir(img, upload_path, im.filename)
+        paths += path
+        images += [img]
 
-    pr.insert_Images([img], [path])
+    await pr.insert_Images(images, paths)
 
-    return path
+    return paths
 
 @milvus_router.post(
     "/insert_pdf",
@@ -71,31 +75,24 @@ file: UploadFile
 async def insert_pdf(
 file: UploadFile
 ):
-    upload_path = r'/image_data'
+    upload_path = r'/home/gleb/PycharmProjects/vllm_db_test/temp_data/image_data'
     #request_object_content = await file.read()
     #file = Image.open(io.BytesIO(request_object_content))
     file_path = f"{upload_path}/{file.filename}"
     with open(file_path, "wb") as f:
         f.write(file.file.read())
     imgs, paths = save_pdf_to_dir_as_images(file_path, upload_path, file.filename)
-
-    pr.insert_Images(imgs , paths)
-
+    await pr.insert_Images(imgs , paths)
     return paths
-
-
-
-
 
 @milvus_router.post(
     "/text_search"
-
 )
 async def text_search(
 text: str = 'fun pic'
 ):
-
-    results = pr.search_Texts([text])
-    if not results[0]:
+    results = await pr.search_Texts(text)
+    if not results:
         return 'empty collection has been provided'
+    print(results)
     return FileResponse(results[0][0][2])
