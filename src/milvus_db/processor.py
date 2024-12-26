@@ -4,8 +4,8 @@ from typing import List
 import PIL.Image
 from fastapi import UploadFile
 
-from src.milvus_db.MilvusColbertCollection import MilvusColbertCollection, client
-from src.milvus_db.external.llm_response import image_embeddings, text_embeddings
+from milvus_db.MilvusColbertCollection import MilvusColbertCollection, client
+from milvus_db.external.llm_response import image_embeddings, text_embeddings
 
 test_retriever = MilvusColbertCollection(collection_name="test", milvus_client=client)
 
@@ -23,7 +23,7 @@ def get_collection_info(collection_name:str):
         return 'no such collection'
     info = client.get_collection_stats(collection_name)
 
-    info = client.query(collection_name=collection_name, filter='doc_id in [1,5]', output_fields=['doc', "doc_id"])
+    #info = client.query(collection_name=collection_name, filter='doc_id in [1,5]', output_fields=['doc', "doc_id"])
 
 
     print(info)
@@ -44,6 +44,8 @@ async def insert_Images(images: List[PIL.Image.Image], names:List[str] = None, c
 
     for i in range(len(images)):
         response = await image_embeddings(images[i])
+
+        print(f'R E S P O N S E = = = ={response}')
         embedding = pickle.loads(response.content) #embedding = await image_embeddings(images[i])
         print(embedding)
         data = {

@@ -8,3 +8,5 @@ temp_data/image_data/
 cache_hub/
 *.venv
 milvus_data/
+*.lock
+*.locks

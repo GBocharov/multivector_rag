@@ -8,10 +8,22 @@ services:
     environment:
         - NVIDIA_VISIBLE_DEVICES=all  # делать все GPU доступными для контейнера
     ports:
-      - "8000:8001"  # Проброс порта 8001 контейнера на 8000 хоста
+      - "8001:8001"  # Проброс порта 8001 контейнера на 8000 хоста
     command: ["uvicorn", "ColQwenLLM.api.main:app", "--host", "0.0.0.0", "--port", "8001"]
     volumes:
       - ./src/ColQwenLLM/:/opt/app-root/src/ColQwenLLM:rw
       - ./src/document_utils/:/opt/app-root/src/document_utils:rw
       - ./models/:/opt/app-root/models:rw
       - ./cache_hub/clpl/:/opt/app-root/cache_hub/clpl:rw
+  milvus-db:
+    build:
+      context: .
+      dockerfile: src/milvus_db/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8000:8000"  # Проброс порта 8000 контейнера на 8000 хоста
+    command: [ "uvicorn", "milvus_db.api.main:app", "--host", "0.0.0.0", "--port", "8000" ]
+    volumes:
+      - ./src/milvus_db/:/opt/app-root/src/milvus_db:rw
+      - ./src/document_utils/:/opt/app-root/src/document_utils:rw
+      - ./temp_data/image_data/:/opt/app-root/temp_data/image_data:rw

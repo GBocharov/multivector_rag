@@ -2,7 +2,7 @@ import os
 
 import PIL.Image
 
-from src.document_utils.doc_parsers import pdf_to_images
+from document_utils.doc_parsers import pdf_to_images
 
 
 def save_image_to_dir(image : PIL.Image.Image, upload_dir:str, name:str = 'im') -> str:

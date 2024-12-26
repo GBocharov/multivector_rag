@@ -4,7 +4,7 @@ from PIL.Image import Image
 
 
 async def get_device():
-    url = "http://localhost:8001/get_device_llm_router_llm_info_post"
+    url = "http://col-qwen-llm:8001/llm_router/get_device_llm_router_llm_info_post"
     async with httpx.AsyncClient() as client:
         try:
             response = await client.get(url)
@@ -16,7 +16,7 @@ async def get_device():
             return {"error": f"Request Error: {str(e)}"}
 
 async def image_embeddings(image: Image, filename: str = 'image'):
-    url = "http://localhost:8001/llm_router/get_image_embeddings"
+    url = "http://col-qwen-llm:8001/llm_router/get_image_embeddings" #"http://localhost:8001/llm_router/get_image_embeddings"
     async with httpx.AsyncClient() as client:
         try:
 
@@ -36,7 +36,7 @@ async def image_embeddings(image: Image, filename: str = 'image'):
             return {"error": f"Request Error: {str(e)}"}
 
 async def text_embeddings(text: str = 'test'):
-    url = f"http://localhost:8001/llm_router/get_text_embeddings?text={text}"
+    url = f"http://col-qwen-llm:8001/llm_router/get_text_embeddings?text={text}"
     async with httpx.AsyncClient() as client:
         try:
             #data = {"text": text}

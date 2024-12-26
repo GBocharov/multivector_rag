@@ -6,13 +6,15 @@ import PIL.Image
 from fastapi import APIRouter, UploadFile
 from fastapi.responses import FileResponse
 
-import src.milvus_db.processor as pr
-from src.document_utils.save_to_dir import save_image_to_dir, save_pdf_to_dir_as_images
+import milvus_db.processor as pr
+from document_utils.save_to_dir import save_image_to_dir, save_pdf_to_dir_as_images
 
 milvus_router = APIRouter(
     prefix="/milvus_router",
     tags=["milvus"],
 )
+
+save_dir = r'/opt/app-root/temp_data/image_data'
 
 
 @milvus_router.get(
@@ -54,7 +56,7 @@ collection_name:str = 'test'
 async def insert_image(
 files: List[UploadFile]
 ):
-    upload_path = r'/home/gleb/PycharmProjects/vllm_db_test/temp_data/image_data'
+    upload_path = save_dir
     paths = []
     images = []
     for im in files:
@@ -75,7 +77,7 @@ files: List[UploadFile]
 async def insert_pdf(
 file: UploadFile
 ):
-    upload_path = r'/home/gleb/PycharmProjects/vllm_db_test/temp_data/image_data'
+    upload_path = save_dir
     #request_object_content = await file.read()
     #file = Image.open(io.BytesIO(request_object_content))
     file_path = f"{upload_path}/{file.filename}"

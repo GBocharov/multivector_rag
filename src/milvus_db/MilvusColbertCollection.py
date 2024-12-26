@@ -4,7 +4,7 @@ from pymilvus import MilvusClient, DataType
 import numpy as np
 import concurrent.futures
 
-from src.milvus_db.schema import data_schema
+from milvus_db.schema import data_schema
 
 client = MilvusClient(uri="./milvus.db")
 
