@@ -1,10 +1,6 @@
 import io
-
-import requests
 import httpx
 from PIL.Image import Image
-from fastapi import UploadFile
-from sympy import content
 
 
 async def get_device():
@@ -38,7 +34,6 @@ async def image_embeddings(image: Image, filename: str = 'image'):
             return {"error": f"HTTP Error: {e.response.status_code}"}
         except httpx.RequestError as e:
             return {"error": f"Request Error: {str(e)}"}
-
 
 async def text_embeddings(text: str = 'test'):
     url = f"http://localhost:8001/llm_router/get_text_embeddings?text={text}"

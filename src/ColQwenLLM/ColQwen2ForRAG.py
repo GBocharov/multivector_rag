@@ -7,11 +7,6 @@ from colpali_engine import ColQwen2, ColQwen2Processor
 from colpali_engine.utils.torch_utils import get_torch_device
 from peft import LoraConfig
 from transformers import Qwen2VLForConditionalGeneration, Qwen2VLProcessor
-from PIL.Image import Image
-
-from src.document_utils.doc_parsers import scale_image
-
-
 class ColQwen2ForRAG(ColQwen2):
     """
     ColQwen2 ColQwenLLM implementation that can be used both for retrieval and generation.
