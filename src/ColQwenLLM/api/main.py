@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from starlette.responses import RedirectResponse
 
-from src.ColQwenLLM.api.llm_router import llm_router
+from ColQwenLLM.api.llm_router import llm_router
 
 app = FastAPI(
     debug=True,

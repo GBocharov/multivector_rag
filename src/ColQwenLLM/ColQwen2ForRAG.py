@@ -1,7 +1,6 @@
-import os
+
 from typing import Any, cast, List
 
-import PIL
 import torch
 from colpali_engine import ColQwen2, ColQwen2Processor
 from colpali_engine.utils.torch_utils import get_torch_device
@@ -60,25 +59,30 @@ class ColQwen2ForRAG(ColQwen2):
         self._is_retrieval_enabled = False
 
 
-model_name = "vidore/colqwen2-v1.0"
+model_name =  "vidore/colqwen2-v1.0"
+cache_hub = r"/opt/app-root/cache_hub/clpl"
+#mmm = r'/opt/app-root/models/colqwen2-v1.0/checkpoint-2310/'
 device = get_torch_device("auto")
 
 print(f"Using device: {device}")
 
-# Get the LoRA config from the pretrained retrieval ColQwenLLM
-lora_config = LoraConfig.from_pretrained(model_name)
 
+# Get the LoRA config from the pretrained retrieval ColQwenLLM
+lora_config = LoraConfig.from_pretrained(model_name,  cache_dir=cache_hub)
+
+print(model_name)
 # Load the processors
-processor_retrieval = cast(ColQwen2Processor, ColQwen2Processor.from_pretrained(model_name))
-processor_generation = cast(Qwen2VLProcessor, Qwen2VLProcessor.from_pretrained(lora_config.base_model_name_or_path))
+processor_retrieval = cast(ColQwen2Processor, ColQwen2Processor.from_pretrained(model_name, cache_dir=cache_hub))
+processor_generation = cast(Qwen2VLProcessor, Qwen2VLProcessor.from_pretrained(lora_config.base_model_name_or_path, cache_dir=cache_hub))
 
 # Load the ColQwenLLM with the loaded pre-trained adapter for retrieval
 model = cast(
     ColQwen2ForRAG,
     ColQwen2ForRAG.from_pretrained(
-        model_name,
+        pretrained_model_name_or_path = model_name,
         torch_dtype=torch.bfloat16,
         device_map=device,
+        cache_dir=cache_hub
     ),
 )
 

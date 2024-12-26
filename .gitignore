@@ -1,8 +1,10 @@
 __pycache__/
 .idea/
 temp_data/pages/
+models/
 temp_data/image_data/
 *.db
 /*test*.py
-
-
+cache_hub/
+*.venv
+milvus_data/

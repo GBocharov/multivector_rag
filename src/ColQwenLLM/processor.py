@@ -4,8 +4,8 @@ from typing import List
 import torch
 from PIL.Image import Image
 
-from src.ColQwenLLM.ColQwen2ForRAG import processor_retrieval, model, processor_generation, device
-from src.document_utils.doc_parsers import scale_image
+from ColQwenLLM.ColQwen2ForRAG import processor_retrieval, model, processor_generation, device
+from document_utils.doc_parsers import scale_image
 
 
 def get_image_embeddings(images : List[Image]) -> List[torch.Tensor]:
