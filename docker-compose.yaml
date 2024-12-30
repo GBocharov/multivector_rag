@@ -14,8 +14,9 @@ services:
     volumes:
       - ./src/ColQwenLLM/:/opt/app-root/src/ColQwenLLM:rw
       - ./src/document_utils/:/opt/app-root/src/document_utils:rw
-      - ./models/:/opt/app-root/models:rw
       - ./cache_hub/clpl/:/opt/app-root/cache_hub/clpl:rw
+
+
   milvus-db:
     build:
       context: .

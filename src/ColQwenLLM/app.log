@@ -1,0 +1,76 @@
+2024-12-30 18:23:29,107 - llmLogger - DEBUG - device = cuda:0
+''2024-12-30 18:26:24' | llmLogger | INFO     | device = cuda:0'
+''2024-12-30 18:27:39' | llmLogger | INFO     | ColQwen2ForRAG.py:78 - device = cuda:0'
+''2024-12-30 18:30:33' | llmLogger | INFO     | ColQwen2ForRAG.py:78 - device = cuda:0'
+''2024-12-30 18:30:33' | llmLogger | INFO     | ColQwen2ForRAG.py:83 - LoRA config загружена успешно.'
+''2024-12-30 18:30:35' | llmLogger | INFO     | ColQwen2ForRAG.py:86 - Процессор для извлечения загружен успешно.'
+''2024-12-30 18:30:36' | llmLogger | INFO     | ColQwen2ForRAG.py:89 - Процессор для генерации загружен успешно.'
+''2024-12-30 18:34:49' | llmLogger | INFO     | ColQwen2ForRAG.py:88 - device = cuda:0'
+''2024-12-30 18:34:49' | llmLogger | INFO     | ColQwen2ForRAG.py:93 - LoRA config загружена успешно.'
+''2024-12-30 18:34:51' | llmLogger | INFO     | ColQwen2ForRAG.py:96 - Процессор для извлечения загружен успешно.'
+''2024-12-30 18:34:52' | llmLogger | INFO     | ColQwen2ForRAG.py:99 - Процессор для генерации загружен успешно.'
+''2024-12-30 18:35:14' | llmLogger | INFO     | ColQwen2ForRAG.py:110 - Модель ColQwenLLM загружена успешно.'
+''2024-12-30 18:39:40' | llmLogger | INFO     | ColQwen2ForRAG.py:88 - device = cuda:0'
+''2024-12-30 18:39:40' | llmLogger | INFO     | ColQwen2ForRAG.py:93 - LoRA config загружена успешно.'
+''2024-12-30 18:39:41' | llmLogger | INFO     | ColQwen2ForRAG.py:96 - Процессор для извлечения загружен успешно.'
+''2024-12-30 18:39:43' | llmLogger | INFO     | ColQwen2ForRAG.py:99 - Процессор для генерации загружен успешно.'
+''2024-12-30 18:40:13' | llmLogger | INFO     | ColQwen2ForRAG.py:88 - device = cuda:0'
+''2024-12-30 18:40:14' | llmLogger | INFO     | ColQwen2ForRAG.py:93 - LoRA config загружена успешно.'
+''2024-12-30 18:40:15' | llmLogger | INFO     | ColQwen2ForRAG.py:96 - Процессор для извлечения загружен успешно.'
+''2024-12-30 18:40:17' | llmLogger | INFO     | ColQwen2ForRAG.py:99 - Процессор для генерации загружен успешно.'
+''2024-12-30 18:40:34' | llmLogger | INFO     | ColQwen2ForRAG.py:110 - Модель ColQwenLLM загружена успешно.'
+''2024-12-30 19:10:46' | llmLogger | INFO     | ColQwen2ForRAG.py:89 - device = cuda:0'
+''2024-12-30 19:10:46' | llmLogger | INFO     | ColQwen2ForRAG.py:94 - LoRA config загружена успешно.'
+''2024-12-30 19:10:48' | llmLogger | INFO     | ColQwen2ForRAG.py:97 - Процессор для извлечения загружен успешно.'
+''2024-12-30 19:10:49' | llmLogger | INFO     | ColQwen2ForRAG.py:100 - Процессор для генерации загружен успешно.'
+''2024-12-30 19:11:09' | llmLogger | INFO     | ColQwen2ForRAG.py:111 - Модель ColQwenLLM загружена успешно.'
+''2024-12-30 19:11:29' | llmLogger | ERROR    | processor.py:113 - An error occurred during the image query process.'
+Traceback (most recent call last):
+  File "/opt/app-root/src/ColQwenLLM/domain/processor.py", line 105, in image_query
+    prompt = conversation.format(query=query)
+             ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'format'
+''2024-12-30 19:12:28' | llmLogger | INFO     | ColQwen2ForRAG.py:89 - device = cuda:0'
+''2024-12-30 19:12:28' | llmLogger | INFO     | ColQwen2ForRAG.py:94 - LoRA config загружена успешно.'
+''2024-12-30 19:12:30' | llmLogger | INFO     | ColQwen2ForRAG.py:97 - Процессор для извлечения загружен успешно.'
+''2024-12-30 19:12:31' | llmLogger | INFO     | ColQwen2ForRAG.py:100 - Процессор для генерации загружен успешно.'
+''2024-12-30 19:12:49' | llmLogger | INFO     | ColQwen2ForRAG.py:111 - Модель ColQwenLLM загружена успешно.'
+''2024-12-30 19:13:00' | llmLogger | ERROR    | processor.py:113 - An error occurred during the image query process.'
+Traceback (most recent call last):
+  File "/opt/app-root/src/ColQwenLLM/domain/processor.py", line 105, in image_query
+    prompt = conversation.format(query=query)
+             ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'dict' object has no attribute 'format'
+''2024-12-30 19:16:52' | llmLogger | INFO     | ColQwen2ForRAG.py:89 - device = cuda:0'
+''2024-12-30 19:16:53' | llmLogger | INFO     | ColQwen2ForRAG.py:94 - LoRA config загружена успешно.'
+''2024-12-30 19:16:54' | llmLogger | INFO     | ColQwen2ForRAG.py:97 - Процессор для извлечения загружен успешно.'
+''2024-12-30 19:16:56' | llmLogger | INFO     | ColQwen2ForRAG.py:100 - Процессор для генерации загружен успешно.'
+''2024-12-30 19:17:14' | llmLogger | INFO     | ColQwen2ForRAG.py:111 - Модель ColQwenLLM загружена успешно.'
+''2024-12-30 19:17:32' | llmLogger | INFO     | processor.py:89 - Decoding the generated response.'
+''2024-12-30 19:21:08' | llmLogger | INFO     | ColQwen2ForRAG.py:89 - device = cuda:0'
+''2024-12-30 19:21:08' | llmLogger | INFO     | ColQwen2ForRAG.py:94 - LoRA config загружена успешно.'
+''2024-12-30 19:21:09' | llmLogger | INFO     | ColQwen2ForRAG.py:97 - Процессор для извлечения загружен успешно.'
+''2024-12-30 19:21:11' | llmLogger | INFO     | ColQwen2ForRAG.py:100 - Процессор для генерации загружен успешно.'
+''2024-12-30 19:21:29' | llmLogger | INFO     | ColQwen2ForRAG.py:111 - Модель ColQwenLLM загружена успешно.'
+''2024-12-30 19:21:39' | llmLogger | INFO     | processor.py:89 - Decoding the generated response.'
+''2024-12-30 19:29:56' | llmLogger | INFO     | ColQwen2ForRAG.py:89 - device = cuda:0'
+''2024-12-30 19:29:56' | llmLogger | INFO     | ColQwen2ForRAG.py:94 - LoRA config загружена успешно.'
+''2024-12-30 19:29:57' | llmLogger | INFO     | ColQwen2ForRAG.py:97 - Процессор для извлечения загружен успешно.'
+''2024-12-30 19:29:59' | llmLogger | INFO     | ColQwen2ForRAG.py:100 - Процессор для генерации загружен успешно.'
+''2024-12-30 19:30:18' | llmLogger | INFO     | ColQwen2ForRAG.py:111 - Модель ColQwenLLM загружена успешно.'
+''2024-12-30 19:31:07' | llmLogger | ERROR    | llm_router.py:31 - An error occurred while processing image embeddings.'
+Traceback (most recent call last):
+  File "/opt/app-root/src/ColQwenLLM/api/llm_router.py", line 25, in image_embeddings
+    img = Image.open(io.BytesIO(request_object_content))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/PIL/Image.py", line 3498, in open
+    raise UnidentifiedImageError(msg)
+PIL.UnidentifiedImageError: cannot identify image file <_io.BytesIO object at 0x7f09395aeca0>
+''2024-12-30 19:31:43' | llmLogger | ERROR    | llm_router.py:55 - An error occurred during the chat processing.'
+Traceback (most recent call last):
+  File "/opt/app-root/src/ColQwenLLM/api/llm_router.py", line 50, in image_chat
+    img = Image.open(io.BytesIO(request_object_content))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/PIL/Image.py", line 3498, in open
+    raise UnidentifiedImageError(msg)
+PIL.UnidentifiedImageError: cannot identify image file <_io.BytesIO object at 0x7f08fc044db0>
