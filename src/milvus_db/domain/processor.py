@@ -1,7 +1,3 @@
-from typing import List
-
-import PIL.Image
-
 from milvus_db.infrastructure.Repository import MilvusRepository, FileSystemRepository
 from milvus_db.infrastructure.schema import InsertImages, InsertImagesToDB, SearchRequest
 
@@ -14,7 +10,7 @@ async def get_db_info():
 
 async def get_collection_info(collection_name:str):
 
-    collections_names = milvus_repository.get_info()
+    collections_names = await milvus_repository.get_info()
     return collections_names
 
 
@@ -22,12 +18,12 @@ def drop_db():
     #milvus_repository.delete('')
         return None
 
-def drop_collection(collection_name:str):
+async def drop_collection(collection_name:str):
 
-    milvus_repository.delete(collection_name=collection_name)
-    file_system_repository.delete(collection_name=collection_name)
+    r1 = await milvus_repository.delete(collection_name=collection_name)
+    r2 = await file_system_repository.delete(collection_name=collection_name)
 
-    return f'collection {collection_name} successfully deleted'
+    return r1, r2
 
 async def insert_Images(request: InsertImages):
 
@@ -42,6 +38,7 @@ async def insert_Images(request: InsertImages):
     )
     await milvus_repository.insert(insert_request)
 
+    return save_paths
 
 
 async def search_Texts(

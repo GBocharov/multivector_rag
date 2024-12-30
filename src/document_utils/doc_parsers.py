@@ -17,8 +17,6 @@ def pdf_to_images(pdf_path, batch_size : int = 10) -> List[PIL.Image.Image]:
 def bytes_to_images(pdf_bytes, batch_size : int = 10) -> List[PIL.Image.Image]:
     images = convert_from_bytes(pdf_bytes)
     images = [scale_image(im) for im in images]
-    #for i, image in enumerate(images):
-    #    image.save(f"pages/page_{i + 1}.png", "PNG")
     return images
 
 
