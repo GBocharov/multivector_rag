@@ -5,8 +5,8 @@ from PIL import Image
 from fastapi import APIRouter, UploadFile
 from starlette.responses import StreamingResponse
 
-from ColQwenLLM.ColQwen2ForRAG import device
-from ColQwenLLM.processor import image_query, get_image_embeddings, get_text_embeddings
+from ColQwenLLM.domain.ColQwen2ForRAG import device
+from ColQwenLLM.domain.processor import image_query, get_image_embeddings, get_text_embeddings
 
 llm_router = APIRouter(
     prefix="/llm_router",

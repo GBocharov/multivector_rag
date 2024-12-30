@@ -6,8 +6,9 @@ import PIL.Image
 from fastapi import APIRouter, UploadFile
 from fastapi.responses import FileResponse
 
-import milvus_db.processor as pr
+import milvus_db.domain.processor as pr
 from document_utils.save_to_dir import save_image_to_dir, save_pdf_to_dir_as_images
+from milvus_db.infrastructure.schema import InsertImages, SearchRequest
 
 milvus_router = APIRouter(
     prefix="/milvus_router",
@@ -22,7 +23,7 @@ save_dir = r'/opt/app-root/temp_data/image_data'
 )
 async def get_db_info(
 ):
-    res =  pr.get_db_info()
+    res =  await pr.get_db_info()
     return res
 
 
@@ -33,7 +34,7 @@ async def get_db_info(
 async def get_collection_info(
 collection_name:str = 'test'
 ):
-    res =  pr.get_collection_info(collection_name)
+    res =  await pr.get_collection_info(collection_name)
 
     return res
 
@@ -54,22 +55,24 @@ collection_name:str = 'test'
     # fastapi.tiangolo.com/advanced/additional-responses/#additional-media-types-for-the-main-response
 )
 async def insert_image(
-files: List[UploadFile]
+files: List[UploadFile],
+collection_name: str
 ):
-    upload_path = save_dir
-    paths = []
     images = []
     for im in files:
         request_object_content = await im.read()
         img = PIL.Image.open(io.BytesIO(request_object_content))
-
-        path = save_image_to_dir(img, upload_path, im.filename)
-        paths += path
         images += [img]
 
-    await pr.insert_Images(images, paths)
+    insert_request = InsertImages(
+        images=images,
+        collection_name=collection_name
+    )
 
-    return paths
+
+    result = await pr.insert_Images(insert_request)
+
+    return result
 
 @milvus_router.post(
     "/insert_pdf",
@@ -91,9 +94,9 @@ file: UploadFile
     "/text_search"
 )
 async def text_search(
-text: str = 'fun pic'
+    request:SearchRequest
 ):
-    results = await pr.search_Texts(query = text)
+    results = await pr.search_Texts(request)
     if not results:
         return 'empty collection has been provided'
     print(results)

@@ -3,6 +3,11 @@ import httpx
 from PIL.Image import Image
 
 
+get_device_url = f'http://col-qwen-llm:8001/llm_router/get_device_llm_router_llm_info_post'
+image_embeddings_url = f'http://col-qwen-llm:8001/llm_router/get_image_embeddings'
+text_embeddings_url = 'http://col-qwen-llm:8001/llm_router/get_text_embeddings?text={text}' # сделать шаблон?
+
+
 async def get_device():
     url = "http://col-qwen-llm:8001/llm_router/get_device_llm_router_llm_info_post"
     async with httpx.AsyncClient() as client:

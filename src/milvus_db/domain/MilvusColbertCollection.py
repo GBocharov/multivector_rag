@@ -1,12 +1,11 @@
-import os
+from typing import Dict
 
-from pymilvus import MilvusClient, DataType
 import numpy as np
 import concurrent.futures
 
-from milvus_db.schema import data_schema
+from milvus_db.domain.schema import data_schema
 
-client = MilvusClient(uri="./milvus.db")
+
 
 class MilvusColbertCollection:
     def __init__(self, milvus_client, collection_name, dim=128):
@@ -103,7 +102,8 @@ class MilvusColbertCollection:
         with concurrent.futures.ThreadPoolExecutor(max_workers=300) as executor:
             futures = {
                 executor.submit(
-                    rerank_single_doc, doc_id, data, client, self.collection_name
+                    rerank_single_doc, doc_id, data, self.client, self.collection_name
+                    #rerank_single_doc, doc_id, data, client, self.collection_name
                 ): doc_id
                 for doc_id in doc_ids
             }
@@ -117,7 +117,7 @@ class MilvusColbertCollection:
         else:
             return scores
 
-    def insert(self, data):
+    def insert(self, data) -> Dict:
         # Insert ColBERT embeddings and metadata for a document into the collection.
         colbert_vecs = [vec for vec in data["colbert_vecs"]]
         seq_length = len(colbert_vecs)
@@ -127,7 +127,7 @@ class MilvusColbertCollection:
         docs[0] = data["filepath"]
 
         # Insert the data as multiple vectors (one for each sequence) along with the corresponding metadata.
-        self.client.insert(
+        return self.client.insert(
             self.collection_name,
             [
                 {
@@ -140,7 +140,12 @@ class MilvusColbertCollection:
             ],
         )
 
-retriever = MilvusColbertCollection(collection_name="colpali", milvus_client=client)
+    def clear(self, expr: str = None):
+        if not expr:
+            pass
+        pass
+
+
 
 
 

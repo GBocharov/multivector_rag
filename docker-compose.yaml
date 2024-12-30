@@ -1,4 +1,5 @@
 services:
+
   col-qwen-llm:
     build:
       context: .
@@ -8,7 +9,7 @@ services:
     environment:
         - NVIDIA_VISIBLE_DEVICES=all  # делать все GPU доступными для контейнера
     ports:
-      - "8001:8001"  # Проброс порта 8001 контейнера на 8000 хоста
+      - "8001:8001"
     command: ["uvicorn", "ColQwenLLM.api.main:app", "--host", "0.0.0.0", "--port", "8001"]
     volumes:
       - ./src/ColQwenLLM/:/opt/app-root/src/ColQwenLLM:rw
@@ -21,9 +22,11 @@ services:
       dockerfile: src/milvus_db/Dockerfile
     restart: unless-stopped
     ports:
-      - "8000:8000"  # Проброс порта 8000 контейнера на 8000 хоста
-    command: [ "uvicorn", "milvus_db.api.main:app", "--host", "0.0.0.0", "--port", "8000" ]
+      - "8000:8000"
+    command: [ "uvicorn", "milvus_db.api.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
     volumes:
       - ./src/milvus_db/:/opt/app-root/src/milvus_db:rw
       - ./src/document_utils/:/opt/app-root/src/document_utils:rw
-      - ./temp_data/image_data/:/opt/app-root/temp_data/image_data:rw
+      - ./milvus_data/:/opt/app-root/milvus_data:rw
+
+#sudo docker compose -f docker-compose.yaml -p autopatent-back up --build milvus-db
