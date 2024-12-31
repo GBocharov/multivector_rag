@@ -4,18 +4,14 @@ from abc import ABC, abstractmethod
 import shutil
 from pymilvus import MilvusClient
 
+from milvus_db.domain.CollectionsBuilder import ColQwenCollection
 from milvus_db.domain.MilvusColbertCollection import MilvusColbertCollection
-from milvus_db.external.llm_response import image_embeddings, text_embeddings
+from milvus_db.infrastructure.ColQwen_adapter.adapter import image_embeddings, text_embeddings
 import milvus_db.infrastructure.config as milvus_config
-from milvus_db.infrastructure.schema import InsertImages, InsertImagesToDB, SearchRequest
+from milvus_db.domain.schema import InsertImages, InsertImagesToDB, SearchRequest
 
-client = MilvusClient(milvus_config.milvus_db_save_dir + '/' +"milvus_demo.db")
-#client.insert()
-test_retriever = MilvusColbertCollection(collection_name="test", milvus_client=client)
 
-collections = {
-    'test' : test_retriever
-}
+test_retriever = ColQwenCollection(collection_name="test")
 
 class Repository(ABC):
 
@@ -36,43 +32,31 @@ class Repository(ABC):
         pass
 
     @abstractmethod
-    async def info(self, entity):
-        pass
-
-    @abstractmethod
     async def search(self, entity):
         pass
 
 class MilvusRepository(Repository):
 
     async def search(self, request: SearchRequest ):
-
         querys, collection_name = request.qyerys, request.collection_name
-        retriever = collections[collection_name]
         results = []
         print(f'query = {querys}')
 
         for query in querys:
             response = await text_embeddings(query)
             query = pickle.loads(response.content)[0]
-            result = retriever.search(query, topk=5)
+            result = test_retriever.search(query, topk=5)
             results.append(result)
-            # import pprint as pp
-            # print('------>')
-            # # pp.pprint(results)
-            # pp.pprint(type(results))
         return results
 
     async def get_info(self, request = None):
-        list_collections = client.list_collections()
-        return list_collections
+        return test_retriever.collection_name
 
     #batch insert
     async def insert(self, request: InsertImagesToDB):
 
         images, names, collection_name = request.images, request.names, request.collection_name
 
-        retriever = collections[collection_name]
 
         result = []
 
@@ -87,7 +71,7 @@ class MilvusRepository(Repository):
                 "doc_id": i,
                 "filepath": names[i] if names else '',
             }
-            res = retriever.insert(data)
+            res = test_retriever.insert(data)
             result.append(res)
         return result
 
@@ -102,8 +86,6 @@ class MilvusRepository(Repository):
     async def get(self, request):
         pass
 
-    async def info(self, request):
-        pass
 
 
 def get_available_save_path(upload_dir_base:str, collection_name:str, origin) -> str:

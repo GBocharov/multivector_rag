@@ -1,15 +1,13 @@
 import io
-from typing import List, Annotated
+from typing import List
 
 import PIL.Image
 from fastapi import APIRouter, UploadFile
 from fastapi.responses import FileResponse
-from pydantic import Field
 
 import milvus_db.domain.processor as pr
 from document_utils.doc_parsers import bytes_to_images
-from document_utils.save_to_dir import save_pdf_to_dir_as_images
-from milvus_db.infrastructure.schema import InsertImages, SearchRequest
+from milvus_db.domain.schema import InsertImages, SearchRequest
 
 milvus_router = APIRouter(
     prefix="/milvus_router",

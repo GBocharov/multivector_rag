@@ -48,4 +48,15 @@ class MilvusConfig:
     search_params: SearchParams = field(default_factory=SearchParams)
     rerank_params: RerankParams = field(default_factory=RerankParams)
 
+@dataclass
+class HybridMilvusConfig:
+    dim: int = 128
+    schema: CollectionSchema = data_schema
+    vector_index_params: List[VectorIndexParams] = field(default_factory=lambda :[VectorIndexParams()])
+    scalar_index_params: ScalarIndexParams = field(default_factory=ScalarIndexParams)
+    search_params: SearchParams = field(default_factory=SearchParams)
+    rerank_params: RerankParams = field(default_factory=RerankParams)
+
 default_collection_config = MilvusConfig()
+
+print()

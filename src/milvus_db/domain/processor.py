@@ -1,5 +1,5 @@
-from milvus_db.infrastructure.Repository import MilvusRepository, FileSystemRepository
-from milvus_db.infrastructure.schema import InsertImages, InsertImagesToDB, SearchRequest
+from milvus_db.domain.Repository import MilvusRepository, FileSystemRepository
+from milvus_db.domain.schema import InsertImages, InsertImagesToDB, SearchRequest
 
 milvus_repository = MilvusRepository()
 file_system_repository = FileSystemRepository()

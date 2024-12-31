@@ -3,13 +3,12 @@ from typing import Dict
 import numpy as np
 import concurrent.futures
 
-from milvus_db.infrastructure.collection_configs.base_config import  default_collection_config as config
+from milvus_db.infrastructure.collection_configs.base_ColQwen_config import  default_collection_config as config
 
+#TODO Strategy, config, separate
 
 class MilvusColbertCollection:
     def __init__(self, milvus_client, collection_name):
-        # Initialize the retriever with a Milvus client, collection name, and dimensionality of the vector embeddings.
-        # If the collection exists, load it.
         self.collection_name = collection_name
         self.client = milvus_client
         self.dim = config.dim
@@ -18,7 +17,6 @@ class MilvusColbertCollection:
         else:
             self.create_collection()
             self.create_index()
-        #post init
 
     def create_collection(self):
         # Create a new collection in Milvus for storing embeddings.
@@ -38,7 +36,7 @@ class MilvusColbertCollection:
         )
         index_params = self.client.prepare_index_params()
         index_params.add_index(
-            **config.vector_index_params
+            **config.vector_index_params.__dict__
         )
 
         self.client.create_index(
@@ -91,10 +89,10 @@ class MilvusColbertCollection:
             futures = {
                 executor.submit(
                     rerank_single_doc, doc_id, data, self.client, self.collection_name
-                    #rerank_single_doc, doc_id, data, client, self.collection_name
                 ): doc_id
                 for doc_id in doc_ids
             }
+
             for future in concurrent.futures.as_completed(futures):
                 score, doc_id, doc = future.result()
                 scores.append((float(score), doc_id, doc))
@@ -128,10 +126,7 @@ class MilvusColbertCollection:
             ],
         )
 
-    def clear(self, expr: str = None):
-        if not expr:
-            pass
-        pass
+
 
 
 

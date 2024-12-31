@@ -30,3 +30,4 @@ class SearchTextsRequest(BaseModel):
 class SearchRequest(BaseModel):
     qyerys : List[str]
     collection_name: str = 'test'
+
