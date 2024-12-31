@@ -12,7 +12,11 @@ from ColQwenLLM.paths_config import logger_conf_path
 
 logging.config.fileConfig(logger_conf_path)
 logger = logging.getLogger('llmLogger')
-llm_router = APIRouter()
+
+llm_router = APIRouter(
+    prefix="/llm_router",
+    tags=["LLM"],
+)
 
 @llm_router.post("/llm_info")
 async def get_device():

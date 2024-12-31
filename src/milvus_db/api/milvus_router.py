@@ -57,7 +57,7 @@ collection_name:str = 'test'
 )
 async def insert_images(
 files: List[UploadFile],
-collection_name: str
+collection_name: str = 'test'
 ):
     images = [PIL.Image.open(io.BytesIO(await im.read())) for im in files]
 

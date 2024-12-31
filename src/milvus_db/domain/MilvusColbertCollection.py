@@ -3,17 +3,16 @@ from typing import Dict
 import numpy as np
 import concurrent.futures
 
-from milvus_db.domain.schema import data_schema
-
+from milvus_db.infrastructure.collection_configs.base_config import  default_collection_config as config
 
 
 class MilvusColbertCollection:
-    def __init__(self, milvus_client, collection_name, dim=128):
+    def __init__(self, milvus_client, collection_name):
         # Initialize the retriever with a Milvus client, collection name, and dimensionality of the vector embeddings.
         # If the collection exists, load it.
         self.collection_name = collection_name
         self.client = milvus_client
-        self.dim = dim
+        self.dim = config.dim
         if self.client.has_collection(collection_name=self.collection_name):
             self.client.load_collection(collection_name)
         else:
@@ -27,7 +26,7 @@ class MilvusColbertCollection:
         if self.client.has_collection(collection_name=self.collection_name):
             self.client.drop_collection(collection_name=self.collection_name)
         self.client.create_collection(
-            collection_name=self.collection_name, schema=data_schema
+            collection_name=self.collection_name, schema=config.data_schema
         )
 
     def create_index(self):
@@ -39,14 +38,7 @@ class MilvusColbertCollection:
         )
         index_params = self.client.prepare_index_params()
         index_params.add_index(
-            field_name="vector",
-            index_name="vector_index",
-            index_type="HNSW",  # or any other index type you want
-            metric_type="IP",  # or the appropriate metric type
-            params={
-                "M": 16,
-                "efConstruction": 500,
-            },  # adjust these parameters as needed
+            **config.vector_index_params
         )
 
         self.client.create_index(
@@ -59,9 +51,7 @@ class MilvusColbertCollection:
 
         index_params = self.client.prepare_index_params()
         index_params.add_index(
-            field_name="doc_id",
-            index_name="int32_index",
-            index_type="INVERTED",  # or any other index type you want
+            **config.scalar_index_params
         )
 
         self.client.create_index(
@@ -70,13 +60,11 @@ class MilvusColbertCollection:
 
     def search(self, data, topk):
         # Perform a vector search on the collection to find the top-k most similar documents.
-        search_params = {"metric_type": "IP", "params": {}}
         results = self.client.search(
             self.collection_name,
             data,
-            limit=int(50),
-            output_fields=["vector", "seq_id", "doc_id", "doc"],
-            search_params=search_params,
+            search_params = config.search_params.search_params,
+            output_fields = config.search_params.output_fields
         )
         doc_ids = set()
         for r_id in range(len(results)):
@@ -90,8 +78,8 @@ class MilvusColbertCollection:
             doc_colbert_vecs = client.query(
                 collection_name=collection_name,
                 filter=f"doc_id in [{doc_id}]",
-                output_fields=["seq_id", "vector", "doc"],
-                limit=1000,
+                output_fields=config.rerank_params.output_fields,
+                limit=config.rerank_params.limit
             )
             doc_vecs = np.vstack(
                 [doc_colbert_vecs[i]["vector"] for i in range(len(doc_colbert_vecs))]

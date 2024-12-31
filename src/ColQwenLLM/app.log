@@ -74,3 +74,13 @@ Traceback (most recent call last):
   File "/usr/local/lib/python3.11/dist-packages/PIL/Image.py", line 3498, in open
     raise UnidentifiedImageError(msg)
 PIL.UnidentifiedImageError: cannot identify image file <_io.BytesIO object at 0x7f08fc044db0>
+''2024-12-31 02:33:29' | llmLogger | INFO     | ColQwen2ForRAG.py:89 - device = cuda:0'
+''2024-12-31 02:33:29' | llmLogger | INFO     | ColQwen2ForRAG.py:94 - LoRA config загружена успешно.'
+''2024-12-31 02:33:31' | llmLogger | INFO     | ColQwen2ForRAG.py:97 - Процессор для извлечения загружен успешно.'
+''2024-12-31 02:33:32' | llmLogger | INFO     | ColQwen2ForRAG.py:100 - Процессор для генерации загружен успешно.'
+''2024-12-31 02:33:56' | llmLogger | INFO     | ColQwen2ForRAG.py:111 - Модель ColQwenLLM загружена успешно.'
+''2024-12-31 02:50:16' | llmLogger | INFO     | ColQwen2ForRAG.py:89 - device = cuda:0'
+''2024-12-31 02:50:17' | llmLogger | INFO     | ColQwen2ForRAG.py:94 - LoRA config загружена успешно.'
+''2024-12-31 02:50:18' | llmLogger | INFO     | ColQwen2ForRAG.py:97 - Процессор для извлечения загружен успешно.'
+''2024-12-31 02:50:19' | llmLogger | INFO     | ColQwen2ForRAG.py:100 - Процессор для генерации загружен успешно.'
+''2024-12-31 02:50:43' | llmLogger | INFO     | ColQwen2ForRAG.py:111 - Модель ColQwenLLM загружена успешно.'
