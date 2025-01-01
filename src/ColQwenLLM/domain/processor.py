@@ -15,7 +15,7 @@ logging.config.fileConfig(logger_conf_path)
 logger = logging.getLogger('llmLogger')
 
 
-def get_image_embeddings(images: List[Image], batch_size: int = 1) -> List[np.ndarray]:
+async def get_image_embeddings(images: List[Image], batch_size: int = 1) -> List[np.ndarray]:
     result_vectors = []
 
     batches = [images[i:i + batch_size] for i in range(0, len(images), batch_size)]
@@ -35,7 +35,7 @@ def get_image_embeddings(images: List[Image], batch_size: int = 1) -> List[np.nd
     return result_vectors
 
 
-def get_text_embeddings(queries: List[str], batch_size: int = 1) -> List[np.ndarray]:
+async def get_text_embeddings(queries: List[str], batch_size: int = 1) -> List[np.ndarray]:
     result_vectors = []
 
     batches = [queries[i:i + batch_size] for i in range(0, len(queries), batch_size)]
@@ -59,7 +59,7 @@ def get_text_embeddings(queries: List[str], batch_size: int = 1) -> List[np.ndar
     return [v.float().numpy() for v in result_vectors]
 
 
-def _prepare_inputs(text_prompt: str, image: Image) -> dict:
+async def _prepare_inputs(text_prompt: str, image: Image) -> dict:
     """Prepare model inputs from the text prompt and image."""
     try:
 
@@ -74,7 +74,7 @@ def _prepare_inputs(text_prompt: str, image: Image) -> dict:
         logger.error("Error preparing inputs for the model: %s", e, exc_info=True)
         raise
 
-def _generate_model_response(inputs_generation: dict) -> List[str]:
+async def _generate_model_response(inputs_generation: dict) -> List[str]:
     """Generate a response from the model using the provided inputs."""
     try:
 
@@ -97,13 +97,13 @@ def _generate_model_response(inputs_generation: dict) -> List[str]:
         raise
 
 
-def image_query(image: Image, query: str = 'test'):
+async def image_query(image: Image, query: str = 'test'):
     try:
         prompt = format_prompt(query)
         image = scale_image(image, 624)
         text_prompt = processor_generation.apply_chat_template(prompt, add_generation_prompt=True)
-        inputs_generation = _prepare_inputs(text_prompt, image)
-        output_text = _generate_model_response(inputs_generation)
+        inputs_generation = await _prepare_inputs(text_prompt, image)
+        output_text = await _generate_model_response(inputs_generation)
         return output_text
 
     except Exception as e:

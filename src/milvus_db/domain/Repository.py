@@ -2,10 +2,8 @@ import os
 import pickle
 from abc import ABC, abstractmethod
 import shutil
-from pymilvus import MilvusClient
 
 from milvus_db.domain.CollectionsBuilder import ColQwenCollection
-from milvus_db.domain.MilvusColbertCollection import MilvusColbertCollection
 from milvus_db.infrastructure.ColQwen_adapter.adapter import image_embeddings, text_embeddings
 import milvus_db.infrastructure.config as milvus_config
 from milvus_db.domain.schema import InsertImages, InsertImagesToDB, SearchRequest
@@ -77,10 +75,7 @@ class MilvusRepository(Repository):
 
 
     async def delete(self, collection_name:str):
-        if collection_name not in client.list_collections():
-            return 'no such collection'
-        client.drop_collection(collection_name=collection_name)
-        collections[collection_name] = MilvusColbertCollection(collection_name="test", milvus_client=client)
+        test_retriever.clear()
         return f'collection {collection_name} successfully deleted'
 
     async def get(self, request):
@@ -125,8 +120,6 @@ class FileSystemRepository(Repository):
         return save_paths
 
     async def delete(self, collection_name: str):
-        if collection_name not in client.list_collections():
-            return 'no such collection'
         upload_dir = os.path.join(milvus_config.milvus_image_data_save_dir, collection_name)
         if os.path.exists(upload_dir):
             shutil.rmtree(upload_dir)
