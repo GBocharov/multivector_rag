@@ -2,6 +2,7 @@ from contextlib import contextmanager
 from typing import Generator
 
 import aiohttp
+import httpx
 from pymilvus import MilvusClient
 
 import milvus_db.infrastructure.config as milvus_config
@@ -9,8 +10,8 @@ import milvus_db.infrastructure.config as milvus_config
 
 #TODO разнести по папкам
 
-async def get_client_session() -> Generator[aiohttp.ClientSession, None, None]:
-    async with aiohttp.ClientSession() as session:
+async def get_client_session():
+    async with httpx.AsyncClient() as session:
         yield session
 
 

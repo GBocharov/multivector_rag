@@ -41,13 +41,13 @@ class Repository(ABC):
 class MilvusRepository(Repository):
 
     @classmethod
-    async def search(cls, db_client, request: SearchRequest):
+    async def search(cls, session, db_client, request: SearchRequest):
         queries, collection_name = request.qyerys, request.collection_name
         results = []
         print(f'query = {queries}')
         with db_client as cl:
             for query in queries:
-                response = await text_embeddings(query)
+                response = await text_embeddings(session, query)
 
                 print(f'R E S P O N S E = = = ={response}')
                 query = pickle.loads(response.content)[0]
@@ -58,14 +58,14 @@ class MilvusRepository(Repository):
 
     #TODO batch insert
     @classmethod
-    async def insert(cls, db_client, request: InsertImagesToDB):
+    async def insert(cls, session, db_client, request: InsertImagesToDB):
 
         images, names, collection_name = request.images, request.names, request.collection_name
 
         result = []
         with db_client as cl:
             for i in range(len(images)):
-                response = await image_embeddings(images[i])
+                response = await image_embeddings(session, images[i])
 
                 print(f'R E S P O N S E = = = ={response}')
                 embedding = pickle.loads(response.content)  # embedding = await image_embeddings(images[i])

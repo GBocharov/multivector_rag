@@ -50,7 +50,7 @@ async def clear_collection(
     db_client = Depends(get_milvus_client)
 ):
 
-    return await pr.drop_collection(session, db_client, collection_name,)
+    return await pr.drop_collection(session, db_client, collection_name)
 
 
 

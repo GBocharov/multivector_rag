@@ -3,10 +3,11 @@ import logging.config
 from typing import Any, cast
 
 import torch
-from colpali_engine import ColQwen2, ColQwen2Processor
-from colpali_engine.utils.torch_utils import get_torch_device
 from peft import LoraConfig
 from transformers import Qwen2VLForConditionalGeneration, Qwen2VLProcessor
+
+from colpali_engine import ColQwen2, ColQwen2Processor
+from colpali_engine.utils.torch_utils import get_torch_device
 
 from ColQwenLLM.paths_config import logger_conf_path
 

@@ -36,7 +36,7 @@ async def insert_Images(session, db_client: MilvusClient, request: InsertImages)
         origin_file_name = None,
         meta_info = None
     )
-    await MilvusRepository.insert(db_client, insert_request)
+    await MilvusRepository.insert(session, db_client, insert_request)
 
     return save_paths
 
@@ -46,5 +46,5 @@ async def search_Texts(
         db_client: MilvusClient,
         request:SearchRequest
 ):
-    results = await MilvusRepository.search(db_client, request)
+    results = await MilvusRepository.search(session, db_client, request)
     return results
