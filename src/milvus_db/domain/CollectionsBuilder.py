@@ -1,22 +1,20 @@
 from abc import ABC, abstractmethod
 from typing import Any
 import numpy as np
-from pymilvus import MilvusClient
-import milvus_db.infrastructure.config as milvus_config
-from milvus_db.infrastructure.collection_configs.base_ColQwen_config import default_collection_config
 
 import concurrent.futures
 
-client = MilvusClient(milvus_config.milvus_db_save_dir + '/' +"milvus_demo.db")
+from milvus_db.infrastructure.collection_configs.base_ColQwen_config import default_collection_config as config
 
 
-def rerank_single_doc(doc_id, data, _client, collection_name, config):
+def rerank_single_doc(doc_id, data, _client, collection_name, cnfg):
     # Rerank a single document by retrieving its embeddings and calculating the similarity with the query.
+
     doc_colbert_vecs = _client.query(
         collection_name=collection_name,
         filter=f"doc_id in [{doc_id}]",
-        output_fields=config.rerank_params.output_fields,
-        limit=config.rerank_params.limit
+        output_fields=cnfg.rerank_params.output_fields,
+        limit=cnfg.rerank_params.limit
     )
     doc_vecs = np.vstack(
         [doc_colbert_vecs[i]["vector"] for i in range(len(doc_colbert_vecs))]
@@ -27,26 +25,21 @@ def rerank_single_doc(doc_id, data, _client, collection_name, config):
 
 class Collection(ABC):
 
+    @classmethod
     @abstractmethod
-    def insert(self, data: Any):
+    def insert(cls, *args, **kwargs):
         pass
 
+    @classmethod
     @abstractmethod
-    def search(self, data: Any) -> bool:
+    def search(cls, *args, **kwargs):
         pass
 
 
 class ColQwenCollection(Collection):
-    _client = client
-    def __init__(self, collection_name:str, config = default_collection_config):
-        self.collection_name = collection_name
-        self.config = config
-        if self._client.has_collection(collection_name=self.collection_name):
-            self._client.load_collection(collection_name)
-        else:
-            self._create_collection()
 
-    def insert(self, data: Any):
+    @classmethod
+    def insert(cls, client, collection_name, data: Any):
         colbert_vecs = data["colbert_vecs"]
         seq_length = len(colbert_vecs)
 
@@ -63,15 +56,20 @@ class ColQwenCollection(Collection):
             for i in range(seq_length)
         ]
 
-        return self._client.insert(self.collection_name, vectors_with_metadata)
 
-    def search(self, data, topk=5):
+        response = client.insert(collection_name, vectors_with_metadata)
+
+        return response
+
+    @classmethod
+    def search(cls, client, collection_name: str, data, topk=5):
         # Perform a vector search on the collection to find the top-k most similar documents.
-        results = self._client.search(
-            self.collection_name,
+
+        results = client.search(
+            collection_name,
             data,
-            search_params=self.config.search_params.search_params,
-            output_fields=self.config.search_params.output_fields
+            search_params = config.search_params.search_params,
+            output_fields = config.search_params.output_fields
         )
         doc_ids = {results[r_id][r]["entity"]["doc_id"] for r_id in range(len(results)) for r in range(len(results[r_id]))}
 
@@ -80,7 +78,7 @@ class ColQwenCollection(Collection):
         with concurrent.futures.ThreadPoolExecutor(max_workers=300) as executor:
             futures = {
                 executor.submit(
-                    rerank_single_doc, doc_id, data, self._client, self.collection_name, self.config
+                    rerank_single_doc, doc_id, data, client, collection_name, config
                 ): doc_id
                 for doc_id in doc_ids
             }
@@ -93,17 +91,19 @@ class ColQwenCollection(Collection):
 
         return scores[:topk]
 
-    def _create_collection(self):
+    @classmethod
+    def _create_collection(cls, client, collection_name: str):
+
         index_params = client.prepare_index_params()
+        index_params.add_index(**config.vector_index_params.__dict__)
+        index_params.add_index(**config.scalar_index_params.__dict__)
 
-        index_params.add_index(**self.config.vector_index_params.__dict__)
-        index_params.add_index(**self.config.scalar_index_params.__dict__)
-
-        self._client.create_collection(
-            collection_name=self.collection_name, schema=self.config.schema
+        client.create_collection(
+            collection_name=collection_name, schema=config.schema, index_params=index_params
         )
 
-    def clear(self):
-        self._client.describe_collection(self.collection_name)
-        self._create_collection()
+    @classmethod
+    def clear(cls, client, collection_name: str):
+        client.drop_collection(collection_name)
+        ColQwenCollection._create_collection(client, collection_name)
 

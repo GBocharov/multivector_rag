@@ -2,27 +2,29 @@ import io
 from typing import List
 
 import PIL.Image
-from fastapi import APIRouter, UploadFile
+from fastapi import APIRouter, UploadFile, Depends
 from fastapi.responses import FileResponse
 
 import milvus_db.domain.processor as pr
 from document_utils.doc_parsers import bytes_to_images
+from milvus_db.api.dependencies import get_client_session, get_milvus_client
 from milvus_db.domain.schema import InsertImages, SearchRequest
+
 
 milvus_router = APIRouter(
     prefix="/milvus_router",
     tags=["milvus"],
 )
 
-save_dir = r'/opt/app-root/temp_data/image_data'
-
 
 @milvus_router.get(
     "/db_info",
 )
 async def get_db_info(
+        session = Depends(get_client_session),
+        db_client = Depends(get_milvus_client)
 ):
-    res =  await pr.get_db_info()
+    res =  await pr.get_db_info(session, db_client)
     return res
 
 
@@ -31,9 +33,11 @@ async def get_db_info(
     response_model_exclude_none=True,
 )
 async def get_collection_info(
-collection_name:str = 'test'
+    collection_name:str = 'test',
+    session = Depends(get_client_session),
+    db_client = Depends(get_milvus_client)
 ):
-    res =  await pr.get_collection_info(collection_name)
+    res =  await pr.get_collection_info(session, db_client, collection_name)
 
     return res
 
@@ -41,10 +45,12 @@ collection_name:str = 'test'
     "/clear_collection"
 )
 async def clear_collection(
-collection_name:str = 'test'
+    collection_name:str = 'test',
+    session = Depends(get_client_session),
+    db_client = Depends(get_milvus_client)
 ):
 
-    return await pr.drop_collection(collection_name)
+    return await pr.drop_collection(session, db_client, collection_name,)
 
 
 
@@ -54,8 +60,10 @@ collection_name:str = 'test'
     # fastapi.tiangolo.com/advanced/additional-responses/#additional-media-types-for-the-main-response
 )
 async def insert_images(
-files: List[UploadFile],
-collection_name: str = 'test'
+    files: List[UploadFile],
+    collection_name: str = 'test',
+    session = Depends(get_client_session),
+    db_client = Depends(get_milvus_client)
 ):
     images = [PIL.Image.open(io.BytesIO(await im.read())) for im in files]
 
@@ -64,7 +72,7 @@ collection_name: str = 'test'
         collection_name=collection_name
     )
 
-    result = await pr.insert_Images(insert_request)
+    result = await pr.insert_Images(session, db_client, insert_request)
 
     return result
 
@@ -73,7 +81,9 @@ collection_name: str = 'test'
 )
 async def insert_pdf(
     file: UploadFile,
-    collection_name: str = 'test'
+    collection_name: str = 'test',
+    session = Depends(get_client_session),
+    db_client = Depends(get_milvus_client)
 ):
     request_object_content = await file.read()
     images = bytes_to_images(request_object_content)
@@ -84,16 +94,18 @@ async def insert_pdf(
         origin_file_name=file.filename
     )
 
-    result = await pr.insert_Images(insert_request)
+    result = await pr.insert_Images(session, db_client, insert_request)
     return result
 
 @milvus_router.post(
     "/text_search"
 )
 async def text_search(
-    request: SearchRequest
+    request: SearchRequest,
+    session = Depends(get_client_session),
+    db_client = Depends(get_milvus_client)
 ):
-    results = await pr.search_Texts(request)
+    results = await pr.search_Texts(session, db_client, request)
     if not results:
         return 'empty collection has been provided'
     print(results)

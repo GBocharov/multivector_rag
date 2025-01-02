@@ -1,7 +1,12 @@
-from fastapi import UploadFile
+import logging.config
 from pydantic import BaseModel
 
+from ColQwenLLM.paths_config import logger_conf_path
 
-class Chat(BaseModel):
-    image: UploadFile
-    query: str = 'test'
+logging.config.fileConfig(logger_conf_path)
+logger = logging.getLogger('llmLogger')
+
+class Message(BaseModel):
+    message: str | None = 'test'
+
+

@@ -14,7 +14,7 @@ async def send_request(method: str, url: str, **kwargs):
             elif method == 'POST':
                 response = await client.post(url, **kwargs)
             response.raise_for_status()  # Проверка на успешный ответ
-            return response.json()
+            return response
         except httpx.HTTPStatusError as e:
             return {"error": f"HTTP Error: {e.response.status_code}"}
         except httpx.RequestError as e:
@@ -36,8 +36,10 @@ async def image_embeddings(image: Image, filename: str = 'image'):
     return await send_request('POST', url, files=files)
 
 async def text_embeddings(text: str = 'test'):
-    url = f"{BASE_URL}/llm_router/get_text_embeddings?text={text}"
-    return await send_request('POST', url)
+    url = f"{BASE_URL}/llm_router/get_text_embeddings"
+    message = {"message": text}
+
+    return await send_request('POST', url, json=message)
 
 #
 #

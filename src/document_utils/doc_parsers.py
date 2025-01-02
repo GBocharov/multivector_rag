@@ -1,7 +1,6 @@
 from typing import List
 
 import PIL.Image
-from PIL import Image
 from pdf2image import convert_from_path, convert_from_bytes
 
 
@@ -18,7 +17,7 @@ def bytes_to_images(pdf_bytes, batch_size : int = 10) -> List[PIL.Image.Image]:
     return images
 
 
-def scale_image(image: Image.Image, new_height: int = 824) -> Image.Image:
+def scale_image(image: PIL.Image.Image, new_height: int = 824) -> PIL.Image.Image:
     width, height = image.size
     aspect_ratio = width / height
     new_width = int(new_height * aspect_ratio)

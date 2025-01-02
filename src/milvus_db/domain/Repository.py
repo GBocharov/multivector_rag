@@ -1,86 +1,98 @@
 import os
 import pickle
-from abc import ABC, abstractmethod
 import shutil
+from abc import ABC, abstractmethod
 
+
+import milvus_db.infrastructure.config as milvus_config
 from milvus_db.domain.CollectionsBuilder import ColQwenCollection
 from milvus_db.infrastructure.ColQwen_adapter.adapter import image_embeddings, text_embeddings
-import milvus_db.infrastructure.config as milvus_config
 from milvus_db.domain.schema import InsertImages, InsertImagesToDB, SearchRequest
 
 
-test_retriever = ColQwenCollection(collection_name="test")
-
 class Repository(ABC):
 
+    @classmethod
     @abstractmethod
-    async def get_info(self, entity):
+    async def get_info(cls, *args, **kwargs):
         pass
 
+    @classmethod
     @abstractmethod
-    async def insert(self, entity):
+    async def insert(cls, *args, **kwargs):
         pass
 
+    @classmethod
     @abstractmethod
-    async def delete(self, entity):
+    async def delete(cls, *args, **kwargs):
         pass
 
+    @classmethod
     @abstractmethod
-    async def get(self, entity):
+    async def get(cls, *args, **kwargs):
         pass
 
+    @classmethod
     @abstractmethod
-    async def search(self, entity):
+    async def search(cls, *args, **kwargs):
         pass
+
 
 class MilvusRepository(Repository):
 
-    async def search(self, request: SearchRequest ):
-        querys, collection_name = request.qyerys, request.collection_name
+    @classmethod
+    async def search(cls, db_client, request: SearchRequest):
+        queries, collection_name = request.qyerys, request.collection_name
         results = []
-        print(f'query = {querys}')
+        print(f'query = {queries}')
+        with db_client as cl:
+            for query in queries:
+                response = await text_embeddings(query)
 
-        for query in querys:
-            response = await text_embeddings(query)
-            query = pickle.loads(response.content)[0]
-            result = test_retriever.search(query, topk=5)
-            results.append(result)
+                print(f'R E S P O N S E = = = ={response}')
+                query = pickle.loads(response.content)[0]
+                result = ColQwenCollection.search(cl, collection_name, query, topk=5)
+                results.append(result)
         return results
 
-    async def get_info(self, request = None):
-        return test_retriever.collection_name
 
-    #batch insert
-    async def insert(self, request: InsertImagesToDB):
+    #TODO batch insert
+    @classmethod
+    async def insert(cls, db_client, request: InsertImagesToDB):
 
         images, names, collection_name = request.images, request.names, request.collection_name
 
-
         result = []
+        with db_client as cl:
+            for i in range(len(images)):
+                response = await image_embeddings(images[i])
 
-        for i in range(len(images)):
-            response = await image_embeddings(images[i])
-
-            print(f'R E S P O N S E = = = ={response}')
-            embedding = pickle.loads(response.content)  # embedding = await image_embeddings(images[i])
-            print(embedding)
-            data = {
-                "colbert_vecs": embedding[0],
-                "doc_id": i,
-                "filepath": names[i] if names else '',
-            }
-            res = test_retriever.insert(data)
-            result.append(res)
+                print(f'R E S P O N S E = = = ={response}')
+                embedding = pickle.loads(response.content)  # embedding = await image_embeddings(images[i])
+                print(embedding)
+                data = {
+                    "colbert_vecs": embedding[0],
+                    "doc_id": i,
+                    "filepath": names[i] if names else '',
+                }
+                res = ColQwenCollection.insert(cl, collection_name, data)
+                result.append(res)
         return result
 
+    @classmethod
+    async def delete(cls, db_client, collection_name:str):
 
-    async def delete(self, collection_name:str):
-        test_retriever.clear()
+        with db_client as cl:
+            ColQwenCollection.clear(cl, collection_name)
         return f'collection {collection_name} successfully deleted'
 
-    async def get(self, request):
+    @classmethod
+    async def get(cls, db_client, collection_name:str, request):
         pass
 
+    @classmethod
+    async def get_info(cls, db_client):
+        pass
 
 
 def get_available_save_path(upload_dir_base:str, collection_name:str, origin) -> str:
@@ -99,36 +111,38 @@ def get_available_save_path(upload_dir_base:str, collection_name:str, origin) ->
 
 class FileSystemRepository(Repository):
 
-    async def search(self, entity):
+    @classmethod
+    async def search(cls, entity):
         pass
 
-    async def get_info(self, entity):
+    @classmethod
+    async def get_info(cls, entity):
         pass
 
-    async def insert(self, request: InsertImages):
+    @classmethod
+    async def insert(cls, request: InsertImages):
         images, collection_name, origin_file = request.images, request.collection_name, request.origin_file_name
-
-
-
         upload_dir = os.path.join(milvus_config.milvus_image_data_save_dir, collection_name)
         save_paths = []
         for image in images:
             save_path = get_available_save_path(upload_dir, collection_name, request.origin_file_name)
             save_paths.append(save_path)
             image.save(save_path)
-
         return save_paths
 
-    async def delete(self, collection_name: str):
+    @classmethod
+    async def delete(cls, collection_name: str):
         upload_dir = os.path.join(milvus_config.milvus_image_data_save_dir, collection_name)
         if os.path.exists(upload_dir):
             shutil.rmtree(upload_dir)
         return f'collection {collection_name} files successfully deleted'
 
-    async def get(self, entity):
+    @classmethod
+    async def get(cls, entity):
         pass
 
-    async def info(self, entity):
+    @classmethod
+    async def info(cls, entity):
         pass
 
 
