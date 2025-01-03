@@ -448,3 +448,254 @@ PIL.UnidentifiedImageError: cannot identify image file <_io.BytesIO object at 0x
 ''2025-01-02 22:49:57' | llmLogger | INFO     | llm_router.py:29 - Successfully processed image_embeddings.'
 ''2025-01-02 22:49:58' | llmLogger | INFO     | llm_router.py:29 - Successfully processed image_embeddings.'
 ''2025-01-02 22:49:59' | llmLogger | INFO     | llm_router.py:29 - Successfully processed image_embeddings.'
+''2025-01-03 10:48:19' | llmLogger | INFO     | ColQwen2ForRAG.py:88 - device = cuda:0'
+''2025-01-03 10:48:19' | llmLogger | INFO     | ColQwen2ForRAG.py:93 - LoRA config загружена успешно.'
+''2025-01-03 10:48:21' | llmLogger | INFO     | ColQwen2ForRAG.py:96 - Процессор для извлечения загружен успешно.'
+''2025-01-03 10:48:22' | llmLogger | INFO     | ColQwen2ForRAG.py:99 - Процессор для генерации загружен успешно.'
+''2025-01-03 10:48:51' | llmLogger | INFO     | ColQwen2ForRAG.py:110 - Модель ColQwenLLM загружена успешно.'
+''2025-01-03 10:53:53' | llmLogger | INFO     | llm_router.py:29 - Successfully processed image_embeddings.'
+''2025-01-03 10:53:59' | llmLogger | INFO     | llm_router.py:29 - Successfully processed image_embeddings.'
+''2025-01-03 10:54:00' | llmLogger | INFO     | llm_router.py:29 - Successfully processed image_embeddings.'
+''2025-01-03 10:54:01' | llmLogger | INFO     | llm_router.py:29 - Successfully processed image_embeddings.'
+''2025-01-03 10:54:02' | llmLogger | INFO     | llm_router.py:29 - Successfully processed image_embeddings.'
+''2025-01-03 10:54:03' | llmLogger | INFO     | llm_router.py:29 - Successfully processed image_embeddings.'
+''2025-01-03 10:54:04' | llmLogger | INFO     | llm_router.py:29 - Successfully processed image_embeddings.'
+''2025-01-03 10:54:05' | llmLogger | INFO     | llm_router.py:29 - Successfully processed image_embeddings.'
+''2025-01-03 10:54:06' | llmLogger | INFO     | llm_router.py:29 - Successfully processed image_embeddings.'
+''2025-01-03 10:54:08' | llmLogger | INFO     | llm_router.py:29 - Successfully processed image_embeddings.'
+''2025-01-03 10:54:09' | llmLogger | INFO     | llm_router.py:29 - Successfully processed image_embeddings.'
+''2025-01-03 10:54:10' | llmLogger | INFO     | llm_router.py:29 - Successfully processed image_embeddings.'
+''2025-01-03 10:54:11' | llmLogger | INFO     | llm_router.py:29 - Successfully processed image_embeddings.'
+''2025-01-03 10:54:12' | llmLogger | INFO     | llm_router.py:29 - Successfully processed image_embeddings.'
+''2025-01-03 10:54:13' | llmLogger | INFO     | llm_router.py:29 - Successfully processed image_embeddings.'
+''2025-01-03 10:54:14' | llmLogger | INFO     | llm_router.py:29 - Successfully processed image_embeddings.'
+''2025-01-03 10:54:15' | llmLogger | INFO     | llm_router.py:29 - Successfully processed image_embeddings.'
+''2025-01-03 10:54:16' | llmLogger | INFO     | llm_router.py:29 - Successfully processed image_embeddings.'
+''2025-01-03 10:54:17' | llmLogger | INFO     | llm_router.py:29 - Successfully processed image_embeddings.'
+''2025-01-03 10:54:19' | llmLogger | INFO     | llm_router.py:29 - Successfully processed image_embeddings.'
+''2025-01-03 10:54:20' | llmLogger | INFO     | llm_router.py:29 - Successfully processed image_embeddings.'
+''2025-01-03 10:54:21' | llmLogger | INFO     | llm_router.py:29 - Successfully processed image_embeddings.'
+''2025-01-03 11:00:00' | llmLogger | INFO     | ColQwen2ForRAG.py:88 - device = cuda:0'
+''2025-01-03 11:00:00' | llmLogger | ERROR    | ColQwen2ForRAG.py:113 - Ошибка при загрузке компонентов: Can't find 'adapter_config.json' at '/opt/app-root/cache_hub/clpl''
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/peft/config.py", line 143, in from_pretrained
+    config_file = hf_hub_download(
+                  ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/huggingface_hub/utils/_validators.py", line 106, in _inner_fn
+    validate_repo_id(arg_value)
+  File "/usr/local/lib/python3.11/dist-packages/huggingface_hub/utils/_validators.py", line 154, in validate_repo_id
+    raise HFValidationError(
+huggingface_hub.errors.HFValidationError: Repo id must be in the form 'repo_name' or 'namespace/repo_name': '/opt/app-root/cache_hub/clpl'. Use `repo_type` argument if needed.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/app-root/src/ColQwenLLM/domain/ColQwen2ForRAG.py", line 92, in <module>
+    lora_config = LoraConfig.from_pretrained(cache_hub, local_files_only = True )
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/peft/config.py", line 147, in from_pretrained
+    raise ValueError(f"Can't find '{CONFIG_NAME}' at '{pretrained_model_name_or_path}'") from exc
+ValueError: Can't find 'adapter_config.json' at '/opt/app-root/cache_hub/clpl'
+''2025-01-03 11:00:05' | llmLogger | INFO     | ColQwen2ForRAG.py:88 - device = cuda:0'
+''2025-01-03 11:00:05' | llmLogger | ERROR    | ColQwen2ForRAG.py:113 - Ошибка при загрузке компонентов: Can't find 'adapter_config.json' at '/opt/app-root/cache_hub/clpl''
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/peft/config.py", line 143, in from_pretrained
+    config_file = hf_hub_download(
+                  ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/huggingface_hub/utils/_validators.py", line 106, in _inner_fn
+    validate_repo_id(arg_value)
+  File "/usr/local/lib/python3.11/dist-packages/huggingface_hub/utils/_validators.py", line 154, in validate_repo_id
+    raise HFValidationError(
+huggingface_hub.errors.HFValidationError: Repo id must be in the form 'repo_name' or 'namespace/repo_name': '/opt/app-root/cache_hub/clpl'. Use `repo_type` argument if needed.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/app-root/src/ColQwenLLM/domain/ColQwen2ForRAG.py", line 92, in <module>
+    lora_config = LoraConfig.from_pretrained(cache_hub, local_files_only = True )
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/peft/config.py", line 147, in from_pretrained
+    raise ValueError(f"Can't find '{CONFIG_NAME}' at '{pretrained_model_name_or_path}'") from exc
+ValueError: Can't find 'adapter_config.json' at '/opt/app-root/cache_hub/clpl'
+''2025-01-03 11:12:46' | llmLogger | INFO     | ColQwen2ForRAG.py:88 - device = cuda:0'
+''2025-01-03 11:12:47' | llmLogger | INFO     | ColQwen2ForRAG.py:93 - LoRA config загружена успешно.'
+''2025-01-03 11:12:48' | llmLogger | INFO     | ColQwen2ForRAG.py:96 - Процессор для извлечения загружен успешно.'
+''2025-01-03 11:12:49' | llmLogger | INFO     | ColQwen2ForRAG.py:99 - Процессор для генерации загружен успешно.'
+''2025-01-03 11:13:20' | llmLogger | INFO     | ColQwen2ForRAG.py:110 - Модель ColQwenLLM загружена успешно.'
+''2025-01-03 11:18:30' | llmLogger | INFO     | ColQwen2ForRAG.py:88 - device = cuda:0'
+''2025-01-03 11:18:30' | llmLogger | INFO     | ColQwen2ForRAG.py:93 - LoRA config загружена успешно.'
+''2025-01-03 11:18:31' | llmLogger | INFO     | ColQwen2ForRAG.py:96 - Процессор для извлечения загружен успешно.'
+''2025-01-03 11:18:33' | llmLogger | INFO     | ColQwen2ForRAG.py:99 - Процессор для генерации загружен успешно.'
+''2025-01-03 11:19:02' | llmLogger | INFO     | ColQwen2ForRAG.py:88 - device = cuda:0'
+''2025-01-03 11:19:03' | llmLogger | INFO     | ColQwen2ForRAG.py:93 - LoRA config загружена успешно.'
+''2025-01-03 11:19:04' | llmLogger | INFO     | ColQwen2ForRAG.py:96 - Процессор для извлечения загружен успешно.'
+''2025-01-03 11:19:05' | llmLogger | INFO     | ColQwen2ForRAG.py:99 - Процессор для генерации загружен успешно.'
+''2025-01-03 11:19:34' | llmLogger | INFO     | ColQwen2ForRAG.py:88 - device = cuda:0'
+''2025-01-03 11:19:34' | llmLogger | INFO     | ColQwen2ForRAG.py:93 - LoRA config загружена успешно.'
+''2025-01-03 11:19:36' | llmLogger | INFO     | ColQwen2ForRAG.py:96 - Процессор для извлечения загружен успешно.'
+''2025-01-03 11:19:37' | llmLogger | INFO     | ColQwen2ForRAG.py:99 - Процессор для генерации загружен успешно.'
+''2025-01-03 11:22:52' | llmLogger | INFO     | ColQwen2ForRAG.py:88 - device = cuda:0'
+''2025-01-03 11:22:53' | llmLogger | INFO     | ColQwen2ForRAG.py:93 - LoRA config загружена успешно.'
+''2025-01-03 11:22:54' | llmLogger | INFO     | ColQwen2ForRAG.py:96 - Процессор для извлечения загружен успешно.'
+''2025-01-03 11:22:56' | llmLogger | INFO     | ColQwen2ForRAG.py:99 - Процессор для генерации загружен успешно.'
+''2025-01-03 11:22:57' | llmLogger | ERROR    | ColQwen2ForRAG.py:113 - Ошибка при загрузке компонентов: Can't instantiate ColQwen2ForRAG model under dtype=torch.int8 since it is not a floating point dtype'
+Traceback (most recent call last):
+  File "/opt/app-root/src/ColQwenLLM/domain/ColQwen2ForRAG.py", line 103, in <module>
+    ColQwen2ForRAG.from_pretrained(
+  File "/usr/local/lib/python3.11/dist-packages/transformers/modeling_utils.py", line 4054, in from_pretrained
+    dtype_orig = cls._set_default_torch_dtype(torch_dtype)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/transformers/modeling_utils.py", line 1666, in _set_default_torch_dtype
+    raise ValueError(
+ValueError: Can't instantiate ColQwen2ForRAG model under dtype=torch.int8 since it is not a floating point dtype
+''2025-01-03 11:23:02' | llmLogger | INFO     | ColQwen2ForRAG.py:88 - device = cuda:0'
+''2025-01-03 11:23:02' | llmLogger | INFO     | ColQwen2ForRAG.py:93 - LoRA config загружена успешно.'
+''2025-01-03 11:23:04' | llmLogger | INFO     | ColQwen2ForRAG.py:96 - Процессор для извлечения загружен успешно.'
+''2025-01-03 11:23:05' | llmLogger | INFO     | ColQwen2ForRAG.py:99 - Процессор для генерации загружен успешно.'
+''2025-01-03 11:23:06' | llmLogger | ERROR    | ColQwen2ForRAG.py:113 - Ошибка при загрузке компонентов: Can't instantiate ColQwen2ForRAG model under dtype=torch.int8 since it is not a floating point dtype'
+Traceback (most recent call last):
+  File "/opt/app-root/src/ColQwenLLM/domain/ColQwen2ForRAG.py", line 103, in <module>
+    ColQwen2ForRAG.from_pretrained(
+  File "/usr/local/lib/python3.11/dist-packages/transformers/modeling_utils.py", line 4054, in from_pretrained
+    dtype_orig = cls._set_default_torch_dtype(torch_dtype)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/transformers/modeling_utils.py", line 1666, in _set_default_torch_dtype
+    raise ValueError(
+ValueError: Can't instantiate ColQwen2ForRAG model under dtype=torch.int8 since it is not a floating point dtype
+''2025-01-03 11:23:11' | llmLogger | INFO     | ColQwen2ForRAG.py:88 - device = cuda:0'
+''2025-01-03 11:23:11' | llmLogger | INFO     | ColQwen2ForRAG.py:93 - LoRA config загружена успешно.'
+''2025-01-03 11:23:13' | llmLogger | INFO     | ColQwen2ForRAG.py:96 - Процессор для извлечения загружен успешно.'
+''2025-01-03 11:23:14' | llmLogger | INFO     | ColQwen2ForRAG.py:99 - Процессор для генерации загружен успешно.'
+''2025-01-03 11:23:15' | llmLogger | ERROR    | ColQwen2ForRAG.py:113 - Ошибка при загрузке компонентов: Can't instantiate ColQwen2ForRAG model under dtype=torch.int8 since it is not a floating point dtype'
+Traceback (most recent call last):
+  File "/opt/app-root/src/ColQwenLLM/domain/ColQwen2ForRAG.py", line 103, in <module>
+    ColQwen2ForRAG.from_pretrained(
+  File "/usr/local/lib/python3.11/dist-packages/transformers/modeling_utils.py", line 4054, in from_pretrained
+    dtype_orig = cls._set_default_torch_dtype(torch_dtype)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/transformers/modeling_utils.py", line 1666, in _set_default_torch_dtype
+    raise ValueError(
+ValueError: Can't instantiate ColQwen2ForRAG model under dtype=torch.int8 since it is not a floating point dtype
+''2025-01-03 11:29:30' | llmLogger | INFO     | ColQwen2ForRAG.py:88 - device = cuda:0'
+''2025-01-03 11:29:31' | llmLogger | INFO     | ColQwen2ForRAG.py:93 - LoRA config загружена успешно.'
+''2025-01-03 11:29:32' | llmLogger | INFO     | ColQwen2ForRAG.py:96 - Процессор для извлечения загружен успешно.'
+''2025-01-03 11:29:33' | llmLogger | INFO     | ColQwen2ForRAG.py:99 - Процессор для генерации загружен успешно.'
+''2025-01-03 11:32:00' | llmLogger | INFO     | ColQwen2ForRAG.py:88 - device = cuda:0'
+''2025-01-03 11:32:01' | llmLogger | INFO     | ColQwen2ForRAG.py:93 - LoRA config загружена успешно.'
+''2025-01-03 11:32:02' | llmLogger | INFO     | ColQwen2ForRAG.py:96 - Процессор для извлечения загружен успешно.'
+''2025-01-03 11:32:04' | llmLogger | INFO     | ColQwen2ForRAG.py:99 - Процессор для генерации загружен успешно.'
+''2025-01-03 11:32:41' | llmLogger | INFO     | ColQwen2ForRAG.py:110 - Модель ColQwenLLM загружена успешно.'
+''2025-01-03 11:34:30' | llmLogger | INFO     | ColQwen2ForRAG.py:88 - device = cuda:0'
+''2025-01-03 11:34:31' | llmLogger | INFO     | ColQwen2ForRAG.py:93 - LoRA config загружена успешно.'
+''2025-01-03 11:34:32' | llmLogger | INFO     | ColQwen2ForRAG.py:96 - Процессор для извлечения загружен успешно.'
+''2025-01-03 11:34:33' | llmLogger | INFO     | ColQwen2ForRAG.py:99 - Процессор для генерации загружен успешно.'
+''2025-01-03 11:35:02' | llmLogger | INFO     | ColQwen2ForRAG.py:110 - Модель ColQwenLLM загружена успешно.'
+''2025-01-03 11:45:06' | llmLogger | INFO     | ColQwen2ForRAG.py:88 - device = cuda:0'
+''2025-01-03 11:45:06' | llmLogger | INFO     | ColQwen2ForRAG.py:93 - LoRA config загружена успешно.'
+''2025-01-03 11:45:08' | llmLogger | INFO     | ColQwen2ForRAG.py:96 - Процессор для извлечения загружен успешно.'
+''2025-01-03 11:45:09' | llmLogger | INFO     | ColQwen2ForRAG.py:99 - Процессор для генерации загружен успешно.'
+''2025-01-03 11:45:40' | llmLogger | INFO     | ColQwen2ForRAG.py:110 - Модель ColQwenLLM загружена успешно.'
+''2025-01-03 11:46:00' | llmLogger | INFO     | llm_router.py:29 - Successfully processed get_device.'
+''2025-01-03 11:46:07' | llmLogger | INFO     | llm_router.py:29 - Successfully processed image_embeddings.'
+''2025-01-03 11:47:36' | llmLogger | INFO     | ColQwen2ForRAG.py:88 - device = cuda:0'
+''2025-01-03 11:47:36' | llmLogger | INFO     | ColQwen2ForRAG.py:93 - LoRA config загружена успешно.'
+''2025-01-03 11:47:38' | llmLogger | INFO     | ColQwen2ForRAG.py:96 - Процессор для извлечения загружен успешно.'
+''2025-01-03 11:47:39' | llmLogger | INFO     | ColQwen2ForRAG.py:99 - Процессор для генерации загружен успешно.'
+''2025-01-03 11:48:08' | llmLogger | INFO     | ColQwen2ForRAG.py:110 - Модель ColQwenLLM загружена успешно.'
+''2025-01-03 11:49:12' | llmLogger | INFO     | ColQwen2ForRAG.py:88 - device = cuda:0'
+''2025-01-03 11:49:12' | llmLogger | INFO     | ColQwen2ForRAG.py:93 - LoRA config загружена успешно.'
+''2025-01-03 11:49:14' | llmLogger | INFO     | ColQwen2ForRAG.py:96 - Процессор для извлечения загружен успешно.'
+''2025-01-03 11:49:15' | llmLogger | INFO     | ColQwen2ForRAG.py:99 - Процессор для генерации загружен успешно.'
+''2025-01-03 11:49:44' | llmLogger | INFO     | ColQwen2ForRAG.py:110 - Модель ColQwenLLM загружена успешно.'
+''2025-01-03 11:50:00' | llmLogger | INFO     | llm_router.py:29 - Successfully processed image_chat.'
+''2025-01-03 11:50:04' | llmLogger | ERROR    | llm_router.py:32 - An error occurred in image_chat.'
+Traceback (most recent call last):
+  File "/opt/app-root/src/ColQwenLLM/api/llm_router.py", line 30, in wrapper
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/app-root/src/ColQwenLLM/api/llm_router.py", line 70, in image_chat
+    return ChatResponse(response=res)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/pydantic/main.py", line 214, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for ChatResponse
+response
+  Input should be a valid string [type=string_type, input_value=["Sorry, but I can't assist with that."], input_type=list]
+    For further information visit https://errors.pydantic.dev/2.10/v/string_type
+''2025-01-03 11:52:03' | llmLogger | INFO     | ColQwen2ForRAG.py:88 - device = cuda:0'
+''2025-01-03 11:52:03' | llmLogger | INFO     | ColQwen2ForRAG.py:93 - LoRA config загружена успешно.'
+''2025-01-03 11:52:05' | llmLogger | INFO     | ColQwen2ForRAG.py:96 - Процессор для извлечения загружен успешно.'
+''2025-01-03 11:52:06' | llmLogger | INFO     | ColQwen2ForRAG.py:99 - Процессор для генерации загружен успешно.'
+''2025-01-03 11:52:35' | llmLogger | INFO     | ColQwen2ForRAG.py:110 - Модель ColQwenLLM загружена успешно.'
+''2025-01-03 11:54:09' | llmLogger | INFO     | llm_router.py:29 - Successfully processed image_chat.'
+''2025-01-03 11:56:35' | llmLogger | INFO     | ColQwen2ForRAG.py:88 - device = cuda:0'
+''2025-01-03 11:56:35' | llmLogger | INFO     | ColQwen2ForRAG.py:93 - LoRA config загружена успешно.'
+''2025-01-03 11:56:37' | llmLogger | INFO     | ColQwen2ForRAG.py:96 - Процессор для извлечения загружен успешно.'
+''2025-01-03 11:56:38' | llmLogger | INFO     | ColQwen2ForRAG.py:99 - Процессор для генерации загружен успешно.'
+''2025-01-03 11:57:09' | llmLogger | INFO     | ColQwen2ForRAG.py:110 - Модель ColQwenLLM загружена успешно.'
+''2025-01-03 11:57:58' | llmLogger | INFO     | llm_router.py:29 - Successfully processed image_chat.'
+''2025-01-03 11:58:17' | llmLogger | INFO     | llm_router.py:29 - Successfully processed image_chat.'
+''2025-01-03 12:08:51' | llmLogger | INFO     | ColQwen2ForRAG.py:88 - device = cuda:0'
+''2025-01-03 12:08:51' | llmLogger | INFO     | ColQwen2ForRAG.py:93 - LoRA config загружена успешно.'
+''2025-01-03 12:08:53' | llmLogger | INFO     | ColQwen2ForRAG.py:96 - Процессор для извлечения загружен успешно.'
+''2025-01-03 12:08:55' | llmLogger | INFO     | ColQwen2ForRAG.py:99 - Процессор для генерации загружен успешно.'
+''2025-01-03 12:09:25' | llmLogger | INFO     | ColQwen2ForRAG.py:110 - Модель ColQwenLLM загружена успешно.'
+''2025-01-03 12:12:25' | llmLogger | INFO     | ColQwen2ForRAG.py:88 - device = cuda:0'
+''2025-01-03 12:12:25' | llmLogger | INFO     | ColQwen2ForRAG.py:93 - LoRA config загружена успешно.'
+''2025-01-03 12:12:27' | llmLogger | INFO     | ColQwen2ForRAG.py:96 - Процессор для извлечения загружен успешно.'
+''2025-01-03 12:12:28' | llmLogger | INFO     | ColQwen2ForRAG.py:99 - Процессор для генерации загружен успешно.'
+''2025-01-03 12:12:57' | llmLogger | INFO     | ColQwen2ForRAG.py:110 - Модель ColQwenLLM загружена успешно.'
+''2025-01-03 16:06:56' | llmLogger | INFO     | ColQwen2ForRAG.py:88 - device = cuda:0'
+''2025-01-03 16:06:56' | llmLogger | INFO     | ColQwen2ForRAG.py:93 - LoRA config загружена успешно.'
+''2025-01-03 16:06:57' | llmLogger | INFO     | ColQwen2ForRAG.py:96 - Процессор для извлечения загружен успешно.'
+''2025-01-03 16:06:59' | llmLogger | INFO     | ColQwen2ForRAG.py:99 - Процессор для генерации загружен успешно.'
+''2025-01-03 16:07:30' | llmLogger | INFO     | ColQwen2ForRAG.py:110 - Модель ColQwenLLM загружена успешно.'
+''2025-01-03 16:10:22' | llmLogger | INFO     | llm_router.py:29 - Successfully processed get_device.'
+''2025-01-03 16:46:04' | llmLogger | INFO     | ColQwen2ForRAG.py:88 - device = cuda:0'
+''2025-01-03 16:46:04' | llmLogger | INFO     | ColQwen2ForRAG.py:93 - LoRA config загружена успешно.'
+''2025-01-03 16:46:05' | llmLogger | INFO     | ColQwen2ForRAG.py:96 - Процессор для извлечения загружен успешно.'
+''2025-01-03 16:46:07' | llmLogger | INFO     | ColQwen2ForRAG.py:99 - Процессор для генерации загружен успешно.'
+''2025-01-03 16:46:36' | llmLogger | INFO     | ColQwen2ForRAG.py:110 - Модель ColQwenLLM загружена успешно.'
+''2025-01-03 16:47:26' | llmLogger | INFO     | ColQwen2ForRAG.py:88 - device = cuda:0'
+''2025-01-03 16:47:26' | llmLogger | INFO     | ColQwen2ForRAG.py:93 - LoRA config загружена успешно.'
+''2025-01-03 16:47:27' | llmLogger | INFO     | ColQwen2ForRAG.py:96 - Процессор для извлечения загружен успешно.'
+''2025-01-03 16:47:29' | llmLogger | INFO     | ColQwen2ForRAG.py:99 - Процессор для генерации загружен успешно.'
+''2025-01-03 16:47:57' | llmLogger | INFO     | ColQwen2ForRAG.py:110 - Модель ColQwenLLM загружена успешно.'
+''2025-01-03 16:48:24' | llmLogger | INFO     | llm_router.py:29 - Successfully processed image_chat.'
+''2025-01-03 16:48:34' | llmLogger | INFO     | llm_router.py:29 - Successfully processed text_embeddings.'
+''2025-01-03 16:49:21' | llmLogger | INFO     | llm_router.py:29 - Successfully processed image_embeddings.'
+''2025-01-03 16:49:47' | llmLogger | INFO     | llm_router.py:29 - Successfully processed image_embeddings.'
+''2025-01-03 16:49:58' | llmLogger | INFO     | llm_router.py:29 - Successfully processed text_embeddings.'
+''2025-01-03 20:25:07' | llmLogger | INFO     | ColQwen2ForRAG.py:88 - device = cuda:0'
+''2025-01-03 20:25:07' | llmLogger | INFO     | ColQwen2ForRAG.py:93 - LoRA config загружена успешно.'
+''2025-01-03 20:25:09' | llmLogger | INFO     | ColQwen2ForRAG.py:96 - Процессор для извлечения загружен успешно.'
+''2025-01-03 20:25:10' | llmLogger | INFO     | ColQwen2ForRAG.py:99 - Процессор для генерации загружен успешно.'
+''2025-01-03 20:25:42' | llmLogger | INFO     | ColQwen2ForRAG.py:110 - Модель ColQwenLLM загружена успешно.'
+''2025-01-03 20:49:56' | llmLogger | INFO     | ColQwen2ForRAG.py:88 - device = cuda:0'
+''2025-01-03 20:49:56' | llmLogger | INFO     | ColQwen2ForRAG.py:93 - LoRA config загружена успешно.'
+''2025-01-03 20:49:58' | llmLogger | INFO     | ColQwen2ForRAG.py:96 - Процессор для извлечения загружен успешно.'
+''2025-01-03 20:49:59' | llmLogger | INFO     | ColQwen2ForRAG.py:99 - Процессор для генерации загружен успешно.'
+''2025-01-03 20:50:29' | llmLogger | INFO     | ColQwen2ForRAG.py:110 - Модель ColQwenLLM загружена успешно.'
+''2025-01-03 21:05:45' | llmLogger | INFO     | ColQwen2ForRAG.py:88 - device = cuda:0'
+''2025-01-03 21:05:46' | llmLogger | INFO     | ColQwen2ForRAG.py:93 - LoRA config загружена успешно.'
+''2025-01-03 21:05:47' | llmLogger | INFO     | ColQwen2ForRAG.py:96 - Процессор для извлечения загружен успешно.'
+''2025-01-03 21:05:49' | llmLogger | INFO     | ColQwen2ForRAG.py:99 - Процессор для генерации загружен успешно.'
+''2025-01-03 21:06:18' | llmLogger | INFO     | ColQwen2ForRAG.py:110 - Модель ColQwenLLM загружена успешно.'
+''2025-01-03 21:09:07' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-03 21:09:44' | llmLogger | INFO     | llm_router.py:30 - Successfully processed get_device.'
+''2025-01-03 21:11:45' | llmLogger | INFO     | llm_router.py:30 - Successfully processed get_device.'
+''2025-01-03 21:14:24' | llmLogger | INFO     | llm_router.py:30 - Successfully processed get_device.'
+''2025-01-03 21:19:17' | llmLogger | INFO     | llm_router.py:30 - Successfully processed get_device.'
+''2025-01-03 22:00:12' | llmLogger | INFO     | llm_router.py:30 - Successfully processed get_device.'
+''2025-01-03 22:06:30' | llmLogger | INFO     | llm_router.py:30 - Successfully processed get_device.'
+''2025-01-03 22:09:35' | llmLogger | INFO     | llm_router.py:30 - Successfully processed get_device.'
+''2025-01-03 22:09:35' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-03 22:10:55' | llmLogger | INFO     | llm_router.py:30 - Successfully processed get_device.'
+''2025-01-03 22:10:55' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-03 22:11:26' | llmLogger | INFO     | llm_router.py:30 - Successfully processed get_device.'
+''2025-01-03 22:11:26' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-03 22:11:26' | llmLogger | INFO     | llm_router.py:30 - Successfully processed text_embeddings.'
+''2025-01-03 22:11:50' | llmLogger | INFO     | llm_router.py:30 - Successfully processed get_device.'
+''2025-01-03 22:11:50' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-03 22:11:50' | llmLogger | INFO     | llm_router.py:30 - Successfully processed text_embeddings.'

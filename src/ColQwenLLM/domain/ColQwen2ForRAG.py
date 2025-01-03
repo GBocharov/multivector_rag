@@ -106,7 +106,7 @@ try:
             device_map=device,
             cache_dir=cache_hub,
         ),
-    )
+    ).eval()
     logger.info("Модель ColQwenLLM загружена успешно.")
 
 except Exception as e:

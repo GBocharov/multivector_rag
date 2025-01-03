@@ -5,13 +5,14 @@ from functools import wraps
 from typing import Annotated, Callable
 
 from PIL import Image
-from fastapi import APIRouter, UploadFile, HTTPException, Depends
 from starlette.responses import StreamingResponse
+from fastapi import APIRouter, UploadFile, HTTPException, Depends
 
-from ColQwenLLM.api.schema import Message
 from ColQwenLLM.domain.ColQwen2ForRAG import device
-from ColQwenLLM.domain.processor import image_query, get_image_embeddings, get_text_embeddings
 from ColQwenLLM.paths_config import logger_conf_path
+from ColQwenLLM.api.schema import Message, ChatResponse, ImageEmbeddingResponse
+from ColQwenLLM.domain.processor import image_query, get_image_embeddings, get_text_embeddings
+
 
 logging.config.fileConfig(logger_conf_path)
 logger = logging.getLogger('llmLogger')
@@ -47,16 +48,16 @@ async def file_to_image(file: UploadFile) -> Image.Image:
 @llm_router.get("/llm_info", summary="Get device information")
 @exception_handler
 async def get_device():
-    return {'device' : device}
+    return {'device': device}
 
-@llm_router.post("/get_image_embeddings", summary="Get image embeddings")
+@llm_router.post("/get_image_embeddings", summary="Get image embeddings", response_model=ImageEmbeddingResponse)
 @exception_handler
 async def image_embeddings(image: Annotated[Image.Image, Depends(file_to_image)]):
     res = await get_image_embeddings([image])
     byte_data = pickle.dumps(res)
     return StreamingResponse(io.BytesIO(byte_data), media_type="application/octet-stream")
 
-@llm_router.post("/get_text_embeddings", summary="Get text embeddings")
+@llm_router.post("/get_text_embeddings", summary="Get text embeddings", response_model=ImageEmbeddingResponse)
 @exception_handler
 async def text_embeddings(message: Message):
     res = await get_text_embeddings([message.message])
@@ -65,6 +66,6 @@ async def text_embeddings(message: Message):
 
 @llm_router.post("/chat", summary="Chat with image")
 @exception_handler
-async def image_chat(image: Annotated[Image.Image, Depends(file_to_image)], query: Annotated[Message, Depends()]):
+async def image_chat(image: Annotated[Image.Image, Depends(file_to_image)], query: str = 'test'):
     res = await image_query(image, query)
     return res

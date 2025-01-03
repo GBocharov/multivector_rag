@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from starlette.responses import RedirectResponse
-
 from starlette.middleware.cors import CORSMiddleware
 
 from milvus_db.api.milvus_router import milvus_router

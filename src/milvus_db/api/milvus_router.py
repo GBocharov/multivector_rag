@@ -2,13 +2,13 @@ import io
 from typing import List
 
 import PIL.Image
-from fastapi import APIRouter, UploadFile, Depends
 from fastapi.responses import FileResponse
+from fastapi import APIRouter, UploadFile, Depends
 
 import milvus_db.domain.processor as pr
 from document_utils.doc_parsers import bytes_to_images
-from milvus_db.api.dependencies import get_client_session, get_milvus_client
 from milvus_db.domain.schema import InsertImages, SearchRequest
+from milvus_db.api.dependencies import get_client_session, get_milvus_client
 
 
 milvus_router = APIRouter(

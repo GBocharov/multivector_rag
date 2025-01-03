@@ -1,5 +1,5 @@
-from dataclasses import dataclass, field
 from typing import Dict, List
+from dataclasses import dataclass, field
 
 from pymilvus import DataType, FieldSchema, CollectionSchema
 

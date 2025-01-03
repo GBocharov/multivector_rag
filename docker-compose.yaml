@@ -10,6 +10,7 @@ services:
         - NVIDIA_VISIBLE_DEVICES=all  # делать все GPU доступными для контейнера
     ports:
       - "8001:8001"
+
     command: ["uvicorn", "ColQwenLLM.api.main:app", "--host", "0.0.0.0", "--port", "8001"]
     volumes:
       - ./src/ColQwenLLM/:/opt/app-root/src/ColQwenLLM:rw

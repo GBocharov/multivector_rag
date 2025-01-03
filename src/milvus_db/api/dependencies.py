@@ -1,8 +1,8 @@
-from contextlib import contextmanager
 from typing import Generator
+from contextlib import contextmanager
 
-import aiohttp
 import httpx
+import aiohttp
 from pymilvus import MilvusClient
 
 import milvus_db.infrastructure.config as milvus_config

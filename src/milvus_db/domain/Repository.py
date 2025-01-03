@@ -6,8 +6,8 @@ from abc import ABC, abstractmethod
 
 import milvus_db.infrastructure.config as milvus_config
 from milvus_db.domain.CollectionsBuilder import ColQwenCollection
-from milvus_db.infrastructure.ColQwen_adapter.adapter import image_embeddings, text_embeddings
 from milvus_db.domain.schema import InsertImages, InsertImagesToDB, SearchRequest
+from milvus_db.infrastructure.ColQwen_adapter.adapter import image_embeddings, text_embeddings
 
 
 class Repository(ABC):
