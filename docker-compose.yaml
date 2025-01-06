@@ -16,7 +16,7 @@ services:
       - ./src/ColQwenLLM/:/opt/app-root/src/ColQwenLLM:rw
       - ./src/document_utils/:/opt/app-root/src/document_utils:rw
       - ./cache_hub/clpl/:/opt/app-root/cache_hub/clpl:rw
-
+      - ./logs/:/opt/app-root/logs:rw
 
   milvus-db:
     build:
@@ -30,5 +30,6 @@ services:
       - ./src/milvus_db/:/opt/app-root/src/milvus_db:rw
       - ./src/document_utils/:/opt/app-root/src/document_utils:rw
       - ./milvus_data/:/opt/app-root/milvus_data:rw
+      - ./logs/:/opt/app-root/logs:rw
 
 #sudo docker compose -f docker-compose.yaml -p autopatent-back up --build milvus-db

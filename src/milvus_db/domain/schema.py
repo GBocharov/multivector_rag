@@ -4,30 +4,24 @@ import PIL.Image
 from pydantic import BaseModel
 
 
-class InsertImages(BaseModel):
-    images: List[PIL.Image.Image]
+class InsertRequest(BaseModel):
     collection_name : str = 'test'
-    origin_file_name : str | None = None
+    origin_file_names : List[str] | None = None
+    images: List[PIL.Image.Image] | None = None
+    description : List[str] = ''
+    content_type : str = 'not defined'
+
     meta_info: List[Dict] | None = None
 
     class Config:
         arbitrary_types_allowed = True
-
-class InsertImagesToDB(InsertImages):
-    names : List[str]
-
-class InsertTextsRequest(BaseModel):
-    texts: List[str]
-    collection_name : str = 'test'
 
 
 class SearchTextsRequest(BaseModel):
     query: str
     collection_name : str = 'test'
 
-
-
 class SearchRequest(BaseModel):
-    qyerys : List[str]
+    queries : List[str]
     collection_name: str = 'test'
 

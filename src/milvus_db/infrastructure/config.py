@@ -8,6 +8,7 @@ milvus_image_data_save_dir = os.path.join(current_dir, '..' , 'milvus_data/image
 
 milvus_document_data_save_dir = os.path.join(current_dir, '..' , 'milvus_data/documents')
 
+logger_conf_path = os.path.join(current_dir, '..', 'logs/milvus.conf')
 
 os.makedirs(name=milvus_db_save_dir, exist_ok = True)
 

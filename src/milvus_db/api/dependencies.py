@@ -15,7 +15,7 @@ async def get_client_session():
         yield session
 
 
-@contextmanager
+#@contextmanager
 def get_milvus_client(token: str | None = None) -> MilvusClient:
 
     if token:

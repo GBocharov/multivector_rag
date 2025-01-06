@@ -1,7 +1,9 @@
 import logging.config
 
 from typing import Any, cast
+from unittest.mock import MagicMock
 
+import numpy as np
 import torch
 from peft import LoraConfig
 from transformers import Qwen2VLForConditionalGeneration, Qwen2VLProcessor
@@ -13,6 +15,9 @@ from ColQwenLLM.paths_config import logger_conf_path
 
 logging.config.fileConfig(logger_conf_path)
 logger = logging.getLogger('llmLogger')
+
+model_name =  "vidore/colqwen2-v1.0"
+cache_hub = r"/opt/app-root/cache_hub/clpl"
 
 class ColQwen2ForRAG(ColQwen2):
     """
@@ -77,11 +82,16 @@ class ColQwen2ForRAG(ColQwen2):
         self._is_retrieval_enabled = False
 
 
+# Создаем mock-объект для ColQwen2ForRAG
+mock_col_qwen = MagicMock(spec=ColQwen2ForRAG)
+mock_col_qwen.device = 'cuda:0'
+# Создаем реальный тензор с нужными параметрами
+mock_tensor = torch.randn(1, 740, 128, dtype=torch.bfloat16, device='cuda:0')
+# Настраиваем mock для forward на возвращение тензора
+mock_col_qwen.forward.return_value = mock_tensor
+# Настраиваем mock для generate (если необходимо)
+mock_col_qwen.generate.return_value = mock_generate_tensor = torch.randint(0, 200000, (1, 1016), device='cuda:0')  # Значения от 0 до 200000
 
-
-model_name =  "vidore/colqwen2-v1.0"
-cache_hub = r"/opt/app-root/cache_hub/clpl"
-#mmm = r'/opt/app-root/models/colqwen2-v1.0/checkpoint-2310/'
 
 
 device = get_torch_device("auto")
@@ -98,15 +108,16 @@ try:
     processor_generation = cast(Qwen2VLProcessor, Qwen2VLProcessor.from_pretrained(lora_config.base_model_name_or_path, cache_dir=cache_hub))
     logger.info("Процессор для генерации загружен успешно.")
 
-    model = cast(
-        ColQwen2ForRAG,
-        ColQwen2ForRAG.from_pretrained(
-            pretrained_model_name_or_path=model_name,
-            torch_dtype=torch.bfloat16,
-            device_map=device,
-            cache_dir=cache_hub,
-        ),
-    ).eval()
+    # model = cast(
+    #     ColQwen2ForRAG,
+    #     ColQwen2ForRAG.from_pretrained(
+    #         pretrained_model_name_or_path=model_name,
+    #         torch_dtype=torch.bfloat16,
+    #         device_map=device,
+    #         cache_dir=cache_hub,
+    #     ),
+    # ).eval()
+    model = mock_col_qwen
     logger.info("Модель ColQwenLLM загружена успешно.")
 
 except Exception as e:

@@ -1,14 +1,14 @@
 import logging.config
 from typing import List
 
-import numpy as np
 import torch
+import numpy as np
 from PIL.Image import Image
 
-from ColQwenLLM.domain.ColQwen2ForRAG import processor_retrieval, model, processor_generation, device
+from document_utils.doc_parsers import scale_image
 from ColQwenLLM.paths_config import logger_conf_path
 from ColQwenLLM.prompts.image_conversation import format_prompt
-from document_utils.doc_parsers import scale_image
+from ColQwenLLM.domain.ColQwen2ForRAG import processor_retrieval, model, processor_generation, device
 
 
 logging.config.fileConfig(logger_conf_path)
@@ -26,6 +26,7 @@ async def get_image_embeddings(images: List[Image], batch_size: int = 1) -> List
 
             with torch.no_grad():
                 image_embeddings = model.forward(**batch_images)
+
                 result_vectors.extend(embedding.cpu().float().numpy() for embedding in torch.unbind(image_embeddings))
 
         except Exception as e:
@@ -74,12 +75,17 @@ async def _prepare_inputs(text_prompt: str, image: Image) -> dict:
         logger.error("Error preparing inputs for the model: %s", e, exc_info=True)
         raise
 
+
 async def _generate_model_response(inputs_generation: dict) -> List[str]:
     """Generate a response from the model using the provided inputs."""
     try:
 
         model.enable_generation()
         output_ids = model.generate(**inputs_generation, max_new_tokens=128)
+
+        print('T Y P E =============== ', type(output_ids))
+        print(output_ids)
+        print(output_ids.shape)
 
         # Ensure that only the newly generated token IDs are retained from output_ids
         generated_ids = [output_ids[len(input_ids):] for input_ids, output_ids in
@@ -108,5 +114,5 @@ async def image_query(image: Image, query: str = 'test'):
 
     except Exception as e:
         logger.error("An error occurred during the image query process.", exc_info=True)
-        return str(e)  # Optionally return the error message
+        return str(e)
 

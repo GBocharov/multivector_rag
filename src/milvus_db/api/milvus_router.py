@@ -7,7 +7,6 @@ from fastapi import APIRouter, UploadFile, Depends
 
 import milvus_db.domain.processor as pr
 from document_utils.doc_parsers import bytes_to_images
-from milvus_db.domain.schema import InsertImages, SearchRequest
 from milvus_db.api.dependencies import get_client_session, get_milvus_client
 
 
@@ -24,35 +23,7 @@ async def get_db_info(
         session = Depends(get_client_session),
         db_client = Depends(get_milvus_client)
 ):
-    res =  await pr.get_db_info(session, db_client)
-    return res
-
-
-@milvus_router.get(
-    "/get_collection_info",
-    response_model_exclude_none=True,
-)
-async def get_collection_info(
-    collection_name:str = 'test',
-    session = Depends(get_client_session),
-    db_client = Depends(get_milvus_client)
-):
-    res =  await pr.get_collection_info(session, db_client, collection_name)
-
-    return res
-
-@milvus_router.get(
-    "/clear_collection"
-)
-async def clear_collection(
-    collection_name:str = 'test',
-    session = Depends(get_client_session),
-    db_client = Depends(get_milvus_client)
-):
-
-    return await pr.drop_collection(session, db_client, collection_name)
-
-
+    return 'Пока нан'
 
 
 @milvus_router.post(
@@ -67,12 +38,7 @@ async def insert_images(
 ):
     images = [PIL.Image.open(io.BytesIO(await im.read())) for im in files]
 
-    insert_request = InsertImages(
-        images=images,
-        collection_name=collection_name
-    )
-
-    result = await pr.insert_Images(session, db_client, insert_request)
+    result = await pr.insert_images_to_collection(session, db_client, collection_name, images)
 
     return result
 
@@ -88,24 +54,19 @@ async def insert_pdf(
     request_object_content = await file.read()
     images = bytes_to_images(request_object_content)
 
-    insert_request = InsertImages(
-        images=images,
-        collection_name=collection_name,
-        origin_file_name=file.filename
-    )
-
-    result = await pr.insert_Images(session, db_client, insert_request)
+    result = await pr.insert_images_to_collection(session, db_client, collection_name, images, file.filename)
     return result
 
 @milvus_router.post(
     "/text_search"
 )
 async def text_search(
-    request: SearchRequest,
+    request: str,
+    collection_name: str = 'test',
     session = Depends(get_client_session),
     db_client = Depends(get_milvus_client)
 ):
-    results = await pr.search_Texts(session, db_client, request)
+    results = await pr.search_texts_data_in_collection(session, db_client, collection_name, request)
     if not results:
         return 'empty collection has been provided'
     print(results)

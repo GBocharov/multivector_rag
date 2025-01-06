@@ -1,8 +1,6 @@
-import io
-from fastapi import FastAPI
 import pytest
 import pickle
-from fastapi.testclient import TestClient
+
 from PIL import Image
 from io import BytesIO
 

@@ -699,3 +699,308 @@ response
 ''2025-01-03 22:11:50' | llmLogger | INFO     | llm_router.py:30 - Successfully processed get_device.'
 ''2025-01-03 22:11:50' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
 ''2025-01-03 22:11:50' | llmLogger | INFO     | llm_router.py:30 - Successfully processed text_embeddings.'
+''2025-01-04 13:15:32' | llmLogger | INFO     | ColQwen2ForRAG.py:88 - device = cuda:0'
+''2025-01-04 13:15:32' | llmLogger | INFO     | ColQwen2ForRAG.py:93 - LoRA config загружена успешно.'
+''2025-01-04 13:15:33' | llmLogger | INFO     | ColQwen2ForRAG.py:96 - Процессор для извлечения загружен успешно.'
+''2025-01-04 13:15:35' | llmLogger | INFO     | ColQwen2ForRAG.py:99 - Процессор для генерации загружен успешно.'
+''2025-01-04 13:16:18' | llmLogger | INFO     | ColQwen2ForRAG.py:110 - Модель ColQwenLLM загружена успешно.'
+''2025-01-04 13:16:50' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-04 13:17:24' | llmLogger | INFO     | llm_router.py:30 - Successfully processed text_embeddings.'
+''2025-01-04 13:18:16' | llmLogger | INFO     | ColQwen2ForRAG.py:88 - device = cuda:0'
+''2025-01-04 13:18:16' | llmLogger | INFO     | ColQwen2ForRAG.py:93 - LoRA config загружена успешно.'
+''2025-01-04 13:18:17' | llmLogger | INFO     | ColQwen2ForRAG.py:96 - Процессор для извлечения загружен успешно.'
+''2025-01-04 13:18:19' | llmLogger | INFO     | ColQwen2ForRAG.py:99 - Процессор для генерации загружен успешно.'
+''2025-01-04 13:18:48' | llmLogger | INFO     | ColQwen2ForRAG.py:110 - Модель ColQwenLLM загружена успешно.'
+''2025-01-04 13:18:50' | llmLogger | INFO     | llm_router.py:30 - Successfully processed text_embeddings.'
+''2025-01-04 13:19:49' | llmLogger | INFO     | ColQwen2ForRAG.py:88 - device = cuda:0'
+''2025-01-04 13:19:50' | llmLogger | INFO     | ColQwen2ForRAG.py:93 - LoRA config загружена успешно.'
+''2025-01-04 13:19:51' | llmLogger | INFO     | ColQwen2ForRAG.py:96 - Процессор для извлечения загружен успешно.'
+''2025-01-04 13:19:52' | llmLogger | INFO     | ColQwen2ForRAG.py:99 - Процессор для генерации загружен успешно.'
+''2025-01-04 13:20:21' | llmLogger | INFO     | ColQwen2ForRAG.py:110 - Модель ColQwenLLM загружена успешно.'
+''2025-01-04 13:20:26' | llmLogger | INFO     | llm_router.py:30 - Successfully processed text_embeddings.'
+''2025-01-04 21:05:47' | llmLogger | INFO     | ColQwen2ForRAG.py:96 - device = cuda:0'
+''2025-01-04 21:05:47' | llmLogger | INFO     | ColQwen2ForRAG.py:101 - LoRA config загружена успешно.'
+''2025-01-04 21:05:49' | llmLogger | INFO     | ColQwen2ForRAG.py:104 - Процессор для извлечения загружен успешно.'
+''2025-01-04 21:05:50' | llmLogger | INFO     | ColQwen2ForRAG.py:107 - Процессор для генерации загружен успешно.'
+''2025-01-04 21:05:50' | llmLogger | INFO     | ColQwen2ForRAG.py:119 - Модель ColQwenLLM загружена успешно.'
+''2025-01-04 21:09:00' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-04 21:09:00' | llmLogger | ERROR    | processor.py:32 - Error processing batch #1 (size 1): Attempting to cast a BatchFeature to type <MagicMock name='mock.device' id='140100298069072'>. This is not supported.'
+''2025-01-04 21:09:09' | llmLogger | INFO     | llm_router.py:30 - Successfully processed text_embeddings.'
+''2025-01-04 21:09:09' | llmLogger | ERROR    | processor.py:54 - Error processing batch #1 (size 1): Attempting to cast a BatchFeature to type <MagicMock name='mock.device' id='140100298069072'>. This is not supported.'
+''2025-01-04 21:09:09' | llmLogger | ERROR    | llm_router.py:33 - An error occurred in text_embeddings.'
+Traceback (most recent call last):
+  File "/opt/app-root/src/ColQwenLLM/api/llm_router.py", line 31, in wrapper
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/app-root/src/ColQwenLLM/api/llm_router.py", line 66, in text_embeddings
+    print(type(res[0]))
+               ~~~^^^
+IndexError: list index out of range
+''2025-01-04 21:10:09' | llmLogger | INFO     | ColQwen2ForRAG.py:96 - device = cuda:0'
+''2025-01-04 21:10:10' | llmLogger | INFO     | ColQwen2ForRAG.py:101 - LoRA config загружена успешно.'
+''2025-01-04 21:10:12' | llmLogger | INFO     | ColQwen2ForRAG.py:104 - Процессор для извлечения загружен успешно.'
+''2025-01-04 21:10:13' | llmLogger | INFO     | ColQwen2ForRAG.py:107 - Процессор для генерации загружен успешно.'
+''2025-01-04 21:10:13' | llmLogger | INFO     | ColQwen2ForRAG.py:119 - Модель ColQwenLLM загружена успешно.'
+''2025-01-04 21:10:17' | llmLogger | INFO     | llm_router.py:30 - Successfully processed text_embeddings.'
+''2025-01-04 21:10:17' | llmLogger | ERROR    | processor.py:54 - Error processing batch #1 (size 1): Attempting to cast a BatchFeature to type <MagicMock name='mock.device' id='139918896016464'>. This is not supported.'
+''2025-01-04 21:10:17' | llmLogger | ERROR    | llm_router.py:33 - An error occurred in text_embeddings.'
+Traceback (most recent call last):
+  File "/opt/app-root/src/ColQwenLLM/api/llm_router.py", line 31, in wrapper
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/app-root/src/ColQwenLLM/api/llm_router.py", line 66, in text_embeddings
+    print(type(res[0]))
+               ~~~^^^
+IndexError: list index out of range
+''2025-01-04 21:10:21' | llmLogger | INFO     | llm_router.py:30 - Successfully processed text_embeddings.'
+''2025-01-04 21:10:21' | llmLogger | ERROR    | processor.py:54 - Error processing batch #1 (size 1): Attempting to cast a BatchFeature to type <MagicMock name='mock.device' id='139918896016464'>. This is not supported.'
+''2025-01-04 21:10:21' | llmLogger | ERROR    | llm_router.py:33 - An error occurred in text_embeddings.'
+Traceback (most recent call last):
+  File "/opt/app-root/src/ColQwenLLM/api/llm_router.py", line 31, in wrapper
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/app-root/src/ColQwenLLM/api/llm_router.py", line 66, in text_embeddings
+    print(type(res[0]))
+               ~~~^^^
+IndexError: list index out of range
+''2025-01-04 21:13:46' | llmLogger | INFO     | ColQwen2ForRAG.py:98 - device = cuda:0'
+''2025-01-04 21:13:46' | llmLogger | INFO     | ColQwen2ForRAG.py:103 - LoRA config загружена успешно.'
+''2025-01-04 21:13:48' | llmLogger | INFO     | ColQwen2ForRAG.py:106 - Процессор для извлечения загружен успешно.'
+''2025-01-04 21:13:49' | llmLogger | INFO     | ColQwen2ForRAG.py:109 - Процессор для генерации загружен успешно.'
+''2025-01-04 21:14:42' | llmLogger | INFO     | ColQwen2ForRAG.py:98 - device = cuda:0'
+''2025-01-04 21:14:42' | llmLogger | INFO     | ColQwen2ForRAG.py:103 - LoRA config загружена успешно.'
+''2025-01-04 21:14:43' | llmLogger | INFO     | ColQwen2ForRAG.py:106 - Процессор для извлечения загружен успешно.'
+''2025-01-04 21:14:45' | llmLogger | INFO     | ColQwen2ForRAG.py:109 - Процессор для генерации загружен успешно.'
+''2025-01-04 21:15:17' | llmLogger | INFO     | ColQwen2ForRAG.py:121 - Модель ColQwenLLM загружена успешно.'
+''2025-01-04 21:15:45' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-04 21:16:39' | llmLogger | INFO     | ColQwen2ForRAG.py:98 - device = cuda:0'
+''2025-01-04 21:16:39' | llmLogger | INFO     | ColQwen2ForRAG.py:103 - LoRA config загружена успешно.'
+''2025-01-04 21:16:40' | llmLogger | INFO     | ColQwen2ForRAG.py:106 - Процессор для извлечения загружен успешно.'
+''2025-01-04 21:16:42' | llmLogger | INFO     | ColQwen2ForRAG.py:109 - Процессор для генерации загружен успешно.'
+''2025-01-04 21:17:15' | llmLogger | INFO     | ColQwen2ForRAG.py:121 - Модель ColQwenLLM загружена успешно.'
+''2025-01-04 21:17:23' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-04 21:19:19' | llmLogger | INFO     | ColQwen2ForRAG.py:98 - device = cuda:0'
+''2025-01-04 21:19:19' | llmLogger | INFO     | ColQwen2ForRAG.py:103 - LoRA config загружена успешно.'
+''2025-01-04 21:19:21' | llmLogger | INFO     | ColQwen2ForRAG.py:106 - Процессор для извлечения загружен успешно.'
+''2025-01-04 21:19:22' | llmLogger | INFO     | ColQwen2ForRAG.py:109 - Процессор для генерации загружен успешно.'
+''2025-01-04 21:19:22' | llmLogger | INFO     | ColQwen2ForRAG.py:121 - Модель ColQwenLLM загружена успешно.'
+''2025-01-04 21:19:41' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-04 21:19:41' | llmLogger | ERROR    | processor.py:37 - Error processing batch #1 (size 1): Attempting to cast a BatchFeature to type <MagicMock name='mock.device' id='139751751282192'>. This is not supported.'
+''2025-01-04 21:22:50' | llmLogger | INFO     | ColQwen2ForRAG.py:103 - device = cuda:0'
+''2025-01-04 21:22:50' | llmLogger | INFO     | ColQwen2ForRAG.py:108 - LoRA config загружена успешно.'
+''2025-01-04 21:22:52' | llmLogger | INFO     | ColQwen2ForRAG.py:111 - Процессор для извлечения загружен успешно.'
+''2025-01-04 21:22:53' | llmLogger | INFO     | ColQwen2ForRAG.py:114 - Процессор для генерации загружен успешно.'
+''2025-01-04 21:22:53' | llmLogger | INFO     | ColQwen2ForRAG.py:126 - Модель ColQwenLLM загружена успешно.'
+''2025-01-04 21:22:58' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-04 21:22:58' | llmLogger | ERROR    | processor.py:37 - Error processing batch #1 (size 1): Attempting to cast a BatchFeature to type <MagicMock name='mock.device' id='139845899685200'>. This is not supported.'
+''2025-01-04 21:25:08' | llmLogger | INFO     | ColQwen2ForRAG.py:103 - device = cuda:0'
+''2025-01-04 21:25:08' | llmLogger | INFO     | ColQwen2ForRAG.py:108 - LoRA config загружена успешно.'
+''2025-01-04 21:25:10' | llmLogger | INFO     | ColQwen2ForRAG.py:111 - Процессор для извлечения загружен успешно.'
+''2025-01-04 21:25:11' | llmLogger | INFO     | ColQwen2ForRAG.py:114 - Процессор для генерации загружен успешно.'
+''2025-01-04 21:25:11' | llmLogger | INFO     | ColQwen2ForRAG.py:126 - Модель ColQwenLLM загружена успешно.'
+''2025-01-04 21:25:17' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-04 21:25:17' | llmLogger | ERROR    | llm_router.py:33 - An error occurred in image_embeddings.'
+Traceback (most recent call last):
+  File "/opt/app-root/src/ColQwenLLM/api/llm_router.py", line 31, in wrapper
+    return await func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/app-root/src/ColQwenLLM/api/llm_router.py", line 56, in image_embeddings
+    res = await get_image_embeddings([image])
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/app-root/src/ColQwenLLM/domain/processor.py", line 25, in get_image_embeddings
+    batch_images = processor_retrieval.process_images(batch).to(model.device)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/transformers/feature_extraction_utils.py", line 236, in to
+    raise ValueError(f"Attempting to cast a BatchFeature to type {str(arg)}. This is not supported.")
+ValueError: Attempting to cast a BatchFeature to type <MagicMock name='mock.device' id='140275894674256'>. This is not supported.
+''2025-01-04 21:26:45' | llmLogger | INFO     | ColQwen2ForRAG.py:105 - device = cuda:0'
+''2025-01-04 21:26:45' | llmLogger | INFO     | ColQwen2ForRAG.py:110 - LoRA config загружена успешно.'
+''2025-01-04 21:26:47' | llmLogger | INFO     | ColQwen2ForRAG.py:113 - Процессор для извлечения загружен успешно.'
+''2025-01-04 21:26:48' | llmLogger | INFO     | ColQwen2ForRAG.py:116 - Процессор для генерации загружен успешно.'
+''2025-01-04 21:26:48' | llmLogger | INFO     | ColQwen2ForRAG.py:128 - Модель ColQwenLLM загружена успешно.'
+''2025-01-04 21:26:56' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-04 21:27:17' | llmLogger | INFO     | ColQwen2ForRAG.py:105 - device = cuda:0'
+''2025-01-04 21:27:17' | llmLogger | INFO     | ColQwen2ForRAG.py:110 - LoRA config загружена успешно.'
+''2025-01-04 21:27:18' | llmLogger | INFO     | ColQwen2ForRAG.py:113 - Процессор для извлечения загружен успешно.'
+''2025-01-04 21:27:19' | llmLogger | INFO     | ColQwen2ForRAG.py:116 - Процессор для генерации загружен успешно.'
+''2025-01-04 21:27:19' | llmLogger | INFO     | ColQwen2ForRAG.py:128 - Модель ColQwenLLM загружена успешно.'
+''2025-01-04 21:27:25' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-04 21:27:37' | llmLogger | INFO     | llm_router.py:30 - Successfully processed text_embeddings.'
+''2025-01-04 21:27:50' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_chat.'
+''2025-01-04 21:27:51' | llmLogger | ERROR    | processor.py:101 - Error generating response from the model: argument 'ids': Can't extract `str` to `Vec`'
+Traceback (most recent call last):
+  File "/opt/app-root/src/ColQwenLLM/domain/processor.py", line 93, in _generate_model_response
+    output_text = processor_generation.batch_decode(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/transformers/models/qwen2_vl/processing_qwen2_vl.py", line 162, in batch_decode
+    return self.tokenizer.batch_decode(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/transformers/tokenization_utils_base.py", line 3964, in batch_decode
+    return [
+           ^
+  File "/usr/local/lib/python3.11/dist-packages/transformers/tokenization_utils_base.py", line 3965, in <listcomp>
+    self.decode(
+  File "/usr/local/lib/python3.11/dist-packages/transformers/tokenization_utils_base.py", line 4004, in decode
+    return self._decode(
+           ^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/transformers/tokenization_utils_fast.py", line 654, in _decode
+    text = self._tokenizer.decode(token_ids, skip_special_tokens=skip_special_tokens)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: argument 'ids': Can't extract `str` to `Vec`
+''2025-01-04 21:27:51' | llmLogger | ERROR    | processor.py:115 - An error occurred during the image query process.'
+Traceback (most recent call last):
+  File "/opt/app-root/src/ColQwenLLM/domain/processor.py", line 111, in image_query
+    output_text = await _generate_model_response(inputs_generation)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/app-root/src/ColQwenLLM/domain/processor.py", line 93, in _generate_model_response
+    output_text = processor_generation.batch_decode(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/transformers/models/qwen2_vl/processing_qwen2_vl.py", line 162, in batch_decode
+    return self.tokenizer.batch_decode(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/transformers/tokenization_utils_base.py", line 3964, in batch_decode
+    return [
+           ^
+  File "/usr/local/lib/python3.11/dist-packages/transformers/tokenization_utils_base.py", line 3965, in <listcomp>
+    self.decode(
+  File "/usr/local/lib/python3.11/dist-packages/transformers/tokenization_utils_base.py", line 4004, in decode
+    return self._decode(
+           ^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/transformers/tokenization_utils_fast.py", line 654, in _decode
+    text = self._tokenizer.decode(token_ids, skip_special_tokens=skip_special_tokens)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: argument 'ids': Can't extract `str` to `Vec`
+''2025-01-04 21:30:05' | llmLogger | INFO     | ColQwen2ForRAG.py:105 - device = cuda:0'
+''2025-01-04 21:30:05' | llmLogger | INFO     | ColQwen2ForRAG.py:110 - LoRA config загружена успешно.'
+''2025-01-04 21:30:06' | llmLogger | INFO     | ColQwen2ForRAG.py:113 - Процессор для извлечения загружен успешно.'
+''2025-01-04 21:30:08' | llmLogger | INFO     | ColQwen2ForRAG.py:116 - Процессор для генерации загружен успешно.'
+''2025-01-04 21:30:40' | llmLogger | INFO     | ColQwen2ForRAG.py:128 - Модель ColQwenLLM загружена успешно.'
+''2025-01-04 21:30:56' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_chat.'
+''2025-01-04 21:33:50' | llmLogger | INFO     | ColQwen2ForRAG.py:105 - device = cuda:0'
+''2025-01-04 21:33:51' | llmLogger | INFO     | ColQwen2ForRAG.py:110 - LoRA config загружена успешно.'
+''2025-01-04 21:33:52' | llmLogger | INFO     | ColQwen2ForRAG.py:113 - Процессор для извлечения загружен успешно.'
+''2025-01-04 21:33:53' | llmLogger | INFO     | ColQwen2ForRAG.py:116 - Процессор для генерации загружен успешно.'
+''2025-01-04 21:33:53' | llmLogger | INFO     | ColQwen2ForRAG.py:128 - Модель ColQwenLLM загружена успешно.'
+''2025-01-04 21:33:58' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_chat.'
+''2025-01-04 21:33:58' | llmLogger | ERROR    | processor.py:101 - Error generating response from the model: argument 'ids': 'float' object cannot be interpreted as an integer'
+Traceback (most recent call last):
+  File "/opt/app-root/src/ColQwenLLM/domain/processor.py", line 93, in _generate_model_response
+    output_text = processor_generation.batch_decode(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/transformers/models/qwen2_vl/processing_qwen2_vl.py", line 162, in batch_decode
+    return self.tokenizer.batch_decode(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/transformers/tokenization_utils_base.py", line 3964, in batch_decode
+    return [
+           ^
+  File "/usr/local/lib/python3.11/dist-packages/transformers/tokenization_utils_base.py", line 3965, in <listcomp>
+    self.decode(
+  File "/usr/local/lib/python3.11/dist-packages/transformers/tokenization_utils_base.py", line 4004, in decode
+    return self._decode(
+           ^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/transformers/tokenization_utils_fast.py", line 654, in _decode
+    text = self._tokenizer.decode(token_ids, skip_special_tokens=skip_special_tokens)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: argument 'ids': 'float' object cannot be interpreted as an integer
+''2025-01-04 21:33:58' | llmLogger | ERROR    | processor.py:115 - An error occurred during the image query process.'
+Traceback (most recent call last):
+  File "/opt/app-root/src/ColQwenLLM/domain/processor.py", line 111, in image_query
+    output_text = await _generate_model_response(inputs_generation)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/app-root/src/ColQwenLLM/domain/processor.py", line 93, in _generate_model_response
+    output_text = processor_generation.batch_decode(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/transformers/models/qwen2_vl/processing_qwen2_vl.py", line 162, in batch_decode
+    return self.tokenizer.batch_decode(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/transformers/tokenization_utils_base.py", line 3964, in batch_decode
+    return [
+           ^
+  File "/usr/local/lib/python3.11/dist-packages/transformers/tokenization_utils_base.py", line 3965, in <listcomp>
+    self.decode(
+  File "/usr/local/lib/python3.11/dist-packages/transformers/tokenization_utils_base.py", line 4004, in decode
+    return self._decode(
+           ^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/transformers/tokenization_utils_fast.py", line 654, in _decode
+    text = self._tokenizer.decode(token_ids, skip_special_tokens=skip_special_tokens)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: argument 'ids': 'float' object cannot be interpreted as an integer
+''2025-01-04 21:34:57' | llmLogger | INFO     | ColQwen2ForRAG.py:105 - device = cuda:0'
+''2025-01-04 21:34:57' | llmLogger | INFO     | ColQwen2ForRAG.py:110 - LoRA config загружена успешно.'
+''2025-01-04 21:34:59' | llmLogger | INFO     | ColQwen2ForRAG.py:113 - Процессор для извлечения загружен успешно.'
+''2025-01-04 21:35:00' | llmLogger | INFO     | ColQwen2ForRAG.py:116 - Процессор для генерации загружен успешно.'
+''2025-01-04 21:35:00' | llmLogger | INFO     | ColQwen2ForRAG.py:128 - Модель ColQwenLLM загружена успешно.'
+''2025-01-04 21:35:02' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_chat.'
+''2025-01-04 21:35:08' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_chat.'
+''2025-01-05 12:29:14' | llmLogger | INFO     | ColQwen2ForRAG.py:98 - device = cuda:0'
+''2025-01-05 12:29:14' | llmLogger | INFO     | ColQwen2ForRAG.py:103 - LoRA config загружена успешно.'
+''2025-01-05 12:29:16' | llmLogger | INFO     | ColQwen2ForRAG.py:106 - Процессор для извлечения загружен успешно.'
+''2025-01-05 12:29:17' | llmLogger | INFO     | ColQwen2ForRAG.py:109 - Процессор для генерации загружен успешно.'
+''2025-01-05 12:29:17' | llmLogger | INFO     | ColQwen2ForRAG.py:121 - Модель ColQwenLLM загружена успешно.'
+''2025-01-06 00:37:01' | llmLogger | INFO     | ColQwen2ForRAG.py:98 - device = cuda:0'
+''2025-01-06 00:37:01' | llmLogger | INFO     | ColQwen2ForRAG.py:103 - LoRA config загружена успешно.'
+''2025-01-06 00:37:03' | llmLogger | INFO     | ColQwen2ForRAG.py:106 - Процессор для извлечения загружен успешно.'
+''2025-01-06 00:37:05' | llmLogger | INFO     | ColQwen2ForRAG.py:109 - Процессор для генерации загружен успешно.'
+''2025-01-06 00:37:05' | llmLogger | INFO     | ColQwen2ForRAG.py:121 - Модель ColQwenLLM загружена успешно.'
+''2025-01-06 00:37:53' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-06 00:38:39' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-06 00:39:56' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-06 00:40:43' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-06 00:42:17' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-06 00:47:19' | llmLogger | INFO     | ColQwen2ForRAG.py:98 - device = cuda:0'
+''2025-01-06 00:47:19' | llmLogger | INFO     | ColQwen2ForRAG.py:103 - LoRA config загружена успешно.'
+''2025-01-06 00:47:21' | llmLogger | INFO     | ColQwen2ForRAG.py:106 - Процессор для извлечения загружен успешно.'
+''2025-01-06 00:47:22' | llmLogger | INFO     | ColQwen2ForRAG.py:109 - Процессор для генерации загружен успешно.'
+''2025-01-06 00:47:22' | llmLogger | INFO     | ColQwen2ForRAG.py:121 - Модель ColQwenLLM загружена успешно.'
+''2025-01-06 00:48:18' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-06 00:48:19' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-06 00:48:19' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-06 00:48:19' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-06 00:48:19' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-06 00:48:20' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-06 00:48:20' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-06 00:48:20' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-06 00:48:20' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-06 00:48:21' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-06 00:48:21' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-06 00:48:21' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-06 00:48:21' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-06 00:48:21' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-06 00:48:21' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-06 00:48:22' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-06 00:48:22' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-06 00:48:22' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-06 00:48:22' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-06 00:48:22' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-06 00:48:23' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-06 00:48:23' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'
+''2025-01-06 00:48:46' | llmLogger | INFO     | llm_router.py:30 - Successfully processed text_embeddings.'
+''2025-01-06 00:48:50' | llmLogger | INFO     | llm_router.py:30 - Successfully processed text_embeddings.'
+''2025-01-06 00:48:53' | llmLogger | INFO     | llm_router.py:30 - Successfully processed text_embeddings.'
+''2025-01-06 00:48:57' | llmLogger | INFO     | llm_router.py:30 - Successfully processed text_embeddings.'
+''2025-01-06 17:50:02' | llmLogger | INFO     | ColQwen2ForRAG.py:98 - device = cuda:0'
+''2025-01-06 17:50:03' | llmLogger | INFO     | ColQwen2ForRAG.py:103 - LoRA config загружена успешно.'
+''2025-01-06 17:50:05' | llmLogger | INFO     | ColQwen2ForRAG.py:106 - Процессор для извлечения загружен успешно.'
+''2025-01-06 17:50:06' | llmLogger | INFO     | ColQwen2ForRAG.py:109 - Процессор для генерации загружен успешно.'
+''2025-01-06 17:50:06' | llmLogger | INFO     | ColQwen2ForRAG.py:121 - Модель ColQwenLLM загружена успешно.'
+''2025-01-06 19:50:19' | llmLogger | INFO     | ColQwen2ForRAG.py:98 - device = cuda:0'
+''2025-01-06 19:50:19' | llmLogger | INFO     | ColQwen2ForRAG.py:103 - LoRA config загружена успешно.'
+''2025-01-06 19:50:21' | llmLogger | INFO     | ColQwen2ForRAG.py:106 - Процессор для извлечения загружен успешно.'
+''2025-01-06 19:50:22' | llmLogger | INFO     | ColQwen2ForRAG.py:109 - Процессор для генерации загружен успешно.'
+''2025-01-06 19:50:22' | llmLogger | INFO     | ColQwen2ForRAG.py:121 - Модель ColQwenLLM загружена успешно.'
+''2025-01-06 19:53:01' | llmLogger | INFO     | ColQwen2ForRAG.py:98 - device = cuda:0'
+''2025-01-06 19:53:01' | llmLogger | INFO     | ColQwen2ForRAG.py:103 - LoRA config загружена успешно.'
+''2025-01-06 19:53:03' | llmLogger | INFO     | ColQwen2ForRAG.py:106 - Процессор для извлечения загружен успешно.'
+''2025-01-06 19:53:05' | llmLogger | INFO     | ColQwen2ForRAG.py:109 - Процессор для генерации загружен успешно.'
+''2025-01-06 19:53:05' | llmLogger | INFO     | ColQwen2ForRAG.py:121 - Модель ColQwenLLM загружена успешно.'
+''2025-01-06 20:00:25' | llmLogger | INFO     | ColQwen2ForRAG.py:98 - device = cuda:0'
+''2025-01-06 20:00:27' | llmLogger | INFO     | ColQwen2ForRAG.py:103 - LoRA config загружена успешно.'
+''2025-01-06 20:00:30' | llmLogger | INFO     | ColQwen2ForRAG.py:106 - Процессор для извлечения загружен успешно.'
+''2025-01-06 20:00:33' | llmLogger | INFO     | ColQwen2ForRAG.py:109 - Процессор для генерации загружен успешно.'
+''2025-01-06 20:00:33' | llmLogger | INFO     | ColQwen2ForRAG.py:121 - Модель ColQwenLLM загружена успешно.'
+''2025-01-06 20:01:00' | llmLogger | INFO     | ColQwen2ForRAG.py:98 - device = cuda:0'
+''2025-01-06 20:01:01' | llmLogger | INFO     | ColQwen2ForRAG.py:103 - LoRA config загружена успешно.'
+''2025-01-06 20:01:02' | llmLogger | INFO     | ColQwen2ForRAG.py:106 - Процессор для извлечения загружен успешно.'
+''2025-01-06 20:01:04' | llmLogger | INFO     | ColQwen2ForRAG.py:109 - Процессор для генерации загружен успешно.'
+''2025-01-06 20:01:04' | llmLogger | INFO     | ColQwen2ForRAG.py:121 - Модель ColQwenLLM загружена успешно.'
+''2025-01-06 20:01:42' | llmLogger | INFO     | llm_router.py:30 - Successfully processed image_embeddings.'

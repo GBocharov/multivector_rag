@@ -8,9 +8,11 @@ pk = FieldSchema(name="pk", dtype=DataType.INT64, is_primary=True)
 vector = FieldSchema(name="vector", dtype=DataType.FLOAT_VECTOR, dim=128)
 seq_id = FieldSchema(name="seq_id", dtype=DataType.INT16)
 doc_id = FieldSchema(name="doc_id", dtype=DataType.INT64)
-doc = FieldSchema(name="doc", dtype=DataType.VARCHAR,  max_length=65535)
+source_path = FieldSchema(name="source_path", dtype=DataType.VARCHAR,  max_length=65535)
+description = FieldSchema(name="description", dtype=DataType.VARCHAR,  max_length=65535)
+content_type = FieldSchema(name="content_type", dtype=DataType.VARCHAR,  max_length=655)
 
-data_schema = CollectionSchema(fields=[pk, vector, seq_id, doc_id, doc], auto_id=True, enable_dynamic_field=True, description="desc of a collection")
+data_schema = CollectionSchema(fields=[pk, vector, seq_id, doc_id, source_path, description, content_type], auto_id=True, enable_dynamic_field=True, description="desc of a collection")
 
 @dataclass
 class VectorIndexParams:
@@ -30,13 +32,13 @@ class ScalarIndexParams:
 class SearchParams:
     limit: int = 50
     search_params:Dict = field(default_factory=lambda:{"metric_type": "IP", "params": {}})
-    output_fields: List[str] = field(default_factory=lambda:["vector", "seq_id", "doc_id", "doc"])
+    output_fields: List[str] = field(default_factory=lambda:["vector", "seq_id", "doc_id", "source_path", "description", "content_type"])
 
 
 @dataclass
 class RerankParams:
     limit: int = 1000
-    output_fields: List[str] = field(default_factory=lambda:["seq_id", "vector", "doc"])
+    output_fields: List[str] = field(default_factory=lambda:["seq_id", "vector", "source_path", "description", "content_type"])
 
 
 @dataclass
